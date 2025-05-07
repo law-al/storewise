@@ -1,6 +1,6 @@
 "use client";
 
-import { Lock, Mail } from "lucide-react";
+import { Lock } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,20 +9,35 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import AuthDiaLog from "./AuthDialog";
 
-const schema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(3, { message: "Password must be Inputed" }),
-});
+const schema = z
+  .object({
+    password: z
+      .string()
+      .min(8, "Password too short")
+      .regex(/^[A-Za-z0-9!@#$%^&*()_+=\-{}\[\]:;"'<>,.?/\\]*$/, {
+        message: "Invalid characters in password",
+      }),
+    confirm: z
+      .string()
+      .min(8, "Password too short")
+      .regex(/^[A-Za-z0-9!@#$%^&*()_+=\-{}\[\]:;"'<>,.?/\\]*$/, {
+        message: "Invalid characters in password",
+      }),
+  })
+  .refine((data) => data.password === data.confirm, {
+    message: "Passwords do not match",
+    path: ["confirm"], // use string, not a variable
+  });
 
 type Input = z.infer<typeof schema>;
 
 const dialogContent = {
-  title: "Login succesful",
-  content: `Let's get started and take your store experience to the next level.`,
-  href: "/home",
+  title: "Password updated succesfully",
+  content: `Your password has been succesfully updated, please login first`,
+  href: "/login",
 };
 
-export default function LoginForm() {
+export default function SetPasswordForm() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const {
@@ -49,15 +64,6 @@ export default function LoginForm() {
       <form onSubmit={onSubmit}>
         <div className="flex flex-col gap-3 mb-8">
           <InputField
-            label="email"
-            type="email"
-            register={register}
-            name="email"
-            icon={<Mail className="text-themeGrey-200" />}
-            error={errors.email?.message}
-            placeholder="Input your email"
-          />
-          <InputField
             label="password"
             type="password"
             register={register}
@@ -66,6 +72,15 @@ export default function LoginForm() {
             error={errors.password?.message}
             placeholder="Input your password"
           />
+          <InputField
+            label="Confirm password"
+            type="password"
+            register={register}
+            name="confirm"
+            icon={<Lock className="text-themeGrey-200" />}
+            error={errors.confirm?.message}
+            placeholder="Input to confirm password"
+          />
         </div>
 
         {/* Submit button instead of dialog trigger */}
@@ -73,7 +88,7 @@ export default function LoginForm() {
           type="submit"
           className="w-full rounded-full bg-themeOrange-500 p-5 shadow-md"
         >
-          Login
+          Confirm
         </Button>
       </form>
 

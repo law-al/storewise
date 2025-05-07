@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputField from "./InputField";
 import { Button } from "./ui/button";
-import { useState } from "react";
-import AuthDiaLog from "./AuthDialog";
 import { useRouter } from "next/navigation";
 
 const schema = z.object({
@@ -20,12 +18,6 @@ const schema = z.object({
 });
 
 type Input = z.infer<typeof schema>;
-
-const dialogContent = {
-  title: "Login succesful",
-  content: `Let's get started and take your store experience to the next level.`,
-  href: "/home",
-};
 
 export default function RegisterForm() {
   const router = useRouter();

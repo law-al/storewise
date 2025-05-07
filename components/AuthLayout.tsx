@@ -14,7 +14,7 @@ export default function AuthLayout({
   return (
     <section className="w-full border border-red-300 h-screen flex">
       <div
-        className="flex-1 h-full flex flex-col p-4"
+        className="flex-1 h-full  flex-col p-4 hidden md:flex"
         style={{
           backgroundImage: `url("${bgImage}")`,
           backgroundRepeat: "no-repeat",
@@ -22,14 +22,15 @@ export default function AuthLayout({
           backgroundPosition: "center",
         }}
       >
-        <div className="w-[85%] mt-auto">
+        <div className="w-full md:w-[85%] mt-auto">
           <h1 className="heading-xl tracking-wide text-themeOrange-400">
             {header}
           </h1>
           <p className="text-xl tracking-wide leading-relaxed">{info}</p>
         </div>
       </div>
-      <div className="flex-1">{children}</div>
+
+      <div className="flex-1 ">{children}</div>
     </section>
   );
 }

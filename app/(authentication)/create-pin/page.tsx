@@ -1,6 +1,5 @@
 import AuthLayout from "@/components/AuthLayout";
 import PinForm from "@/components/PinForm";
-import RegisterForm from "@/components/RegisterForm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

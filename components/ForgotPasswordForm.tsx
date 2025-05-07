@@ -1,29 +1,22 @@
 "use client";
 
-import { Lock, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputField from "./InputField";
 import { Button } from "./ui/button";
-import { useState } from "react";
-import AuthDiaLog from "./AuthDialog";
+
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(3, { message: "Password must be Inputed" }),
 });
 
 type Input = z.infer<typeof schema>;
 
-const dialogContent = {
-  title: "Login succesful",
-  content: `Let's get started and take your store experience to the next level.`,
-  href: "/home",
-};
-
-export default function LoginForm() {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+export default function ForgotPasswordForm() {
+  const router = useRouter();
 
   const {
     register,
@@ -34,15 +27,11 @@ export default function LoginForm() {
   });
 
   const onSubmit = handleSubmit((data) => {
-    console.log("Yes");
+    console.log("yes");
     console.log(data);
     // Form is valid, now we can open the dialog
-    setIsDialogOpen(true);
+    router.push("/verify-otp");
   });
-
-  const handleDialogOpen = () => {
-    setIsDialogOpen(false);
-  };
 
   return (
     <>
@@ -57,15 +46,6 @@ export default function LoginForm() {
             error={errors.email?.message}
             placeholder="Input your email"
           />
-          <InputField
-            label="password"
-            type="password"
-            register={register}
-            name="password"
-            icon={<Lock className="text-themeGrey-200" />}
-            error={errors.password?.message}
-            placeholder="Input your password"
-          />
         </div>
 
         {/* Submit button instead of dialog trigger */}
@@ -73,16 +53,9 @@ export default function LoginForm() {
           type="submit"
           className="w-full rounded-full bg-themeOrange-500 p-5 shadow-md"
         >
-          Login
+          Continue
         </Button>
       </form>
-
-      {/* Separate dialog that's controlled by the form submission */}
-      <AuthDiaLog
-        isDialogOpen={isDialogOpen}
-        handleDialogOpen={handleDialogOpen}
-        dialogContent={dialogContent}
-      />
     </>
   );
 }

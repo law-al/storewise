@@ -1,5 +1,6 @@
-import { log } from "console";
-import React from "react";
+import { Eye, EyeClosed } from "lucide-react";
+import React, { useState } from "react";
+import { FieldError } from "react-hook-form";
 
 export default function InputField({
   label,
@@ -9,9 +10,22 @@ export default function InputField({
   error,
   icon,
   placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  register: any;
+  error?: string;
+  icon: React.ReactNode;
+  placeholder: string;
 }) {
   if (error) {
     console.log(error);
+  }
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  function showPassword() {
+    setIsPasswordShown(!isPasswordShown);
   }
 
   return (
@@ -26,12 +40,24 @@ export default function InputField({
       >
         {icon}
         <input
-          type={type}
+          type={
+            type === "password" ? (isPasswordShown ? "text" : "password") : type
+          }
           name={name}
           placeholder={placeholder}
           {...register(name)}
           className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full"
         />
+
+        {(name === "password" || name === "confirm") && (
+          <span onClick={showPassword}>
+            {!isPasswordShown ? (
+              <Eye size={18} strokeWidth={1.5} />
+            ) : (
+              <EyeClosed size={18} strokeWidth={1.5} />
+            )}
+          </span>
+        )}
       </div>
     </div>
   );

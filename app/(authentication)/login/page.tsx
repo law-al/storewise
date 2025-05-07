@@ -10,14 +10,14 @@ export default function LoginPage() {
     "Effortlessly manage your store with powerful tools designed to boost productivity and increase sales. From inventory tracking to detailed sales analytics.";
   return (
     <AuthLayout bgImage="/LoginImage.png" header={header} info={info}>
-      <div className="h-full flex items-center justify-center p-8">
-        <div className="w-2/3">
+      <div className="h-full flex items-center justify-center p-4 md:p-8">
+        <div className="w-full md:w-2/3">
           <h2 className="heading text-center mb-3">Hi, Welcome</h2>
           <p className="text-center mb-5 text-themeGrey-300">
             Please login to an employee account
           </p>
 
-          <div className="flex items-center gap-5 mb-5">
+          <div className="flex flex-col md:flex-row items-center gap-5 mb-5">
             <LoginLink logo="Google" />
             <LoginLink logo="Apple" />
           </div>
@@ -48,7 +48,7 @@ export default function LoginPage() {
 
             <div className="">
               <Link
-                href="/"
+                href="/forget-password"
                 className="text-sm hover:text-themeOrange-300 transition-all duration-200"
               >
                 Forgot password ?
