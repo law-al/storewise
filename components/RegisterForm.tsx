@@ -40,8 +40,8 @@ export default function RegisterForm() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col gap-3 mb-8">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-3 mb-4 md:mb-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
             <InputField
               label="firstname"
               register={register}

@@ -36,7 +36,7 @@ export default function ForgotPasswordForm() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col gap-3 mb-8">
+        <div className="flex flex-col gap-3 mb-4 md:mb-8">
           <InputField
             label="email"
             type="email"

@@ -10,21 +10,23 @@ export default function LoginPage() {
     "Effortlessly manage your store with powerful tools designed to boost productivity and increase sales. From inventory tracking to detailed sales analytics.";
   return (
     <AuthLayout bgImage="/LoginImage.png" header={header} info={info}>
-      <div className="h-full flex items-center justify-center p-4 md:p-8">
+      <div className="auth-section">
         <div className="w-full md:w-2/3">
-          <h2 className="heading text-center mb-3">Hi, Welcome</h2>
-          <p className="text-center mb-5 text-themeGrey-300">
+          <h2 className="heading-lg text-center mb-1 md:mb-3">Hi, Welcome</h2>
+          <p className="text-sm md:text-[18px] text-center mb-5 text-themeGrey-300">
             Please login to an employee account
           </p>
 
-          <div className="flex flex-col md:flex-row items-center gap-5 mb-5">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-5 mb-5">
             <LoginLink logo="Google" />
             <LoginLink logo="Apple" />
           </div>
 
-          <div className="flex items-center gap-2 mb-5">
+          <div className="flex items-center gap-2 mb-2 md:mb-5">
             <div className="border border-themeGrey-50 flex-1"></div>
-            <div className=" text-center text-themeGrey-200">Sign in</div>
+            <div className=" text-center text-themeGrey-200 text-sm md:text-[18px]">
+              Sign in
+            </div>
             <div className="border border-themeGrey-50 flex-1"></div>
           </div>
 
@@ -32,7 +34,7 @@ export default function LoginPage() {
             <LoginForm />
           </div>
 
-          <div className="flex items-center justify-between mt-3">
+          <div className="flex items-center justify-between mt-3 text-sm md:text-sm">
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="remember"
@@ -56,9 +58,9 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div className="text-center flex items-center gap-2 justify-center mt-3">
+          <div className="text-center flex items-center gap-2 justify-center mt-3 text-sm md:text-[18px]">
             <p className="">Don&apos;t have an account?</p>
-            <Link href="/register" className="text-themeOrange-200 ">
+            <Link href="/register" className="text-themeOrange-200">
               Sign up
             </Link>
           </div>

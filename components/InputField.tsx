@@ -1,6 +1,5 @@
 import { Eye, EyeClosed } from "lucide-react";
 import React, { useState } from "react";
-import { FieldError } from "react-hook-form";
 
 export default function InputField({
   label,
@@ -30,7 +29,7 @@ export default function InputField({
 
   return (
     <div className="flex flex-col">
-      <label className="capitalize mb-1" htmlFor={name}>
+      <label className="text-sm md:text-[18px] capitalize mb-1" htmlFor={name}>
         {label}
       </label>
       <div
@@ -46,7 +45,7 @@ export default function InputField({
           name={name}
           placeholder={placeholder}
           {...register(name)}
-          className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full"
+          className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full placeholder:text-sm placeholder:md:text-[18px]"
         />
 
         {(name === "password" || name === "confirm") && (
