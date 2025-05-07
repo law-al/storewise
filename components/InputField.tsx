@@ -1,5 +1,5 @@
-import { log } from "console";
-import React from "react";
+import { Eye, EyeClosed } from "lucide-react";
+import React, { useState } from "react";
 
 export default function InputField({
   label,
@@ -9,14 +9,27 @@ export default function InputField({
   error,
   icon,
   placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  register: any;
+  error?: string;
+  icon: React.ReactNode;
+  placeholder: string;
 }) {
   if (error) {
     console.log(error);
   }
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
+
+  function showPassword() {
+    setIsPasswordShown(!isPasswordShown);
+  }
 
   return (
     <div className="flex flex-col">
-      <label className="capitalize mb-1" htmlFor={name}>
+      <label className="text-sm md:text-[18px] capitalize mb-1" htmlFor={name}>
         {label}
       </label>
       <div
@@ -26,12 +39,24 @@ export default function InputField({
       >
         {icon}
         <input
-          type={type}
+          type={
+            type === "password" ? (isPasswordShown ? "text" : "password") : type
+          }
           name={name}
           placeholder={placeholder}
           {...register(name)}
-          className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full"
+          className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full placeholder:text-sm placeholder:md:text-[18px]"
         />
+
+        {(name === "password" || name === "confirm") && (
+          <span onClick={showPassword}>
+            {!isPasswordShown ? (
+              <Eye size={18} strokeWidth={1.5} />
+            ) : (
+              <EyeClosed size={18} strokeWidth={1.5} />
+            )}
+          </span>
+        )}
       </div>
     </div>
   );

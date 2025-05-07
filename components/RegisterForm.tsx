@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputField from "./InputField";
 import { Button } from "./ui/button";
-import { useState } from "react";
-import AuthDiaLog from "./AuthDialog";
 import { useRouter } from "next/navigation";
 
 const schema = z.object({
@@ -20,12 +18,6 @@ const schema = z.object({
 });
 
 type Input = z.infer<typeof schema>;
-
-const dialogContent = {
-  title: "Login succesful",
-  content: `Let's get started and take your store experience to the next level.`,
-  href: "/home",
-};
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -48,8 +40,8 @@ export default function RegisterForm() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div className="flex flex-col gap-3 mb-8">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-3 mb-4 md:mb-8">
+          <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
             <InputField
               label="firstname"
               register={register}

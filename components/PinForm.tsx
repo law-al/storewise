@@ -86,7 +86,7 @@ export default function PinForm() {
 
         <Button
           type="submit"
-          className="w-full rounded-full bg-themeOrange-500 p-5 shadow-md mb-5"
+          className="w-full rounded-full bg-themeOrange-500 p-5 shadow-md mb-3 md:mb-5"
           disabled={isSubmitting}
         >
           {isSubmitting ? "Creating..." : "Create Account"}

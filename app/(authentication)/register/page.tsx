@@ -8,10 +8,12 @@ export default function RegisterPage() {
     "Streamline your operations with all-in-one dashboard. Easily manage your products, Keep track of order and Co-ordinate with your team";
   return (
     <AuthLayout bgImage="/LoginImage.png" header={header} info={info}>
-      <div className="h-full flex items-center justify-center p-8">
-        <div className="w-2/3">
-          <h2 className="heading text-center mb-3">Create Account</h2>
-          <p className="text-center mb-5 text-themeGrey-300">
+      <div className="auth-section">
+        <div className="w-full md:w-2/3">
+          <h2 className="heading-lg text-center mb-1 md:mb-3">
+            Create Account
+          </h2>
+          <p className="text-sm md:text-[18px] text-center mb-5 text-themeGrey-300">
             Please input to your account
           </p>
 
@@ -19,7 +21,7 @@ export default function RegisterPage() {
             <RegisterForm />
           </div>
 
-          <div className="text-center flex items-center gap-2 justify-center mt-3">
+          <div className="text-center flex items-center gap-2 justify-center mt-3 text-sm md:text-[18px]">
             <p className="">Already have an account?</p>
             <Link href="/login" className="text-themeOrange-200 ">
               Sign in

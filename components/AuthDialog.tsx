@@ -51,7 +51,9 @@ export default function AuthDialog({
               onClick={handleDialogOpen}
               className="w-full rounded-full p-5 bg-themeOrange-500"
             >
-              <Link href={dialogContent.href}>Start shift</Link>
+              <Link href={dialogContent.href}>
+                {dialogContent.href === "/login" ? "Login" : "Start shift"}
+              </Link>
             </Button>
           </DialogFooter>
         </DialogContent>
