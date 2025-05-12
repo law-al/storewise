@@ -5,6 +5,7 @@ import {
   ChevronDown,
   Home,
   Inbox,
+  LucideIcon,
   MenuIcon,
   Search,
   Settings,
@@ -32,6 +33,14 @@ import {
   CollapsibleTrigger,
 } from "./ui/collapsible";
 import { usePathname } from "next/navigation";
+import Navbar from "./Navbar";
+
+interface Items {
+  title: string;
+  url: string;
+  icon: LucideIcon; // or React.ElementType or React.ReactNode depending on your use
+  ariaLabel: string;
+}
 
 // Navigation items with consistent structure
 const navItems = {
@@ -96,7 +105,21 @@ const navItems = {
 };
 
 // Reusable NavGroup component to reduce duplication
-function NavGroup({ title, items, isCollapsed, pathName }) {
+function NavGroup({
+  title,
+  items,
+  isCollapsed,
+  pathName,
+  toggleSidebar,
+  isMobile,
+}: {
+  title: string;
+  items: Items[];
+  isCollapsed: boolean;
+  pathName?: string;
+  toggleSidebar;
+  isMobile: boolean;
+}) {
   return (
     <SidebarGroup>
       <SidebarGroupLabel
@@ -118,6 +141,7 @@ function NavGroup({ title, items, isCollapsed, pathName }) {
               <SidebarMenuButton asChild>
                 <Link
                   href={item.url}
+                  onClick={() => isMobile && toggleSidebar()}
                   className={`py-3 h-10 flex items-center ${
                     pathName === item.url
                       ? "text-themeOrange-300 hover:!bg-themeOrange-300/5"
@@ -136,7 +160,7 @@ function NavGroup({ title, items, isCollapsed, pathName }) {
                     />
                   )}
                   <span
-                    className={`${isCollapsed ? "sr-only" : "ml-3"} ${
+                    className={`${isCollapsed ? "" : "ml-3"} ${
                       pathName === item.url
                         ? "text-themeOrange-300"
                         : "text-black"
@@ -154,10 +178,29 @@ function NavGroup({ title, items, isCollapsed, pathName }) {
   );
 }
 
+function MobileNav() {
+  return (
+    <div className="flex items-center justify-between p-3 w-full h-[15vh]">
+      <div className="flex gap-2 items-center">
+        <CustomTrigger isMobile={true} />
+        {/* <p className="block md:hidden">y</p> */}
+        <Image
+          src="/logo-png.png"
+          alt="Brand Logo"
+          width={30}
+          height={30}
+          className="block md:hidden"
+        />
+      </div>
+      <Navbar />
+    </div>
+  );
+}
+
 export default function AppSidebar() {
   const pathName = usePathname();
-  console.log(pathName);
-  const { state, toggleSidebar } = useSidebar();
+  const { state, isMobile, toggleSidebar } = useSidebar();
+  console.log(isMobile);
   const isCollapsed = state === "collapsed";
 
   return (
@@ -167,40 +210,45 @@ export default function AppSidebar() {
       role="navigation"
       aria-label="Main Navigation"
     >
-      <SidebarContent className="flex flex-col justify-between h-full">
+      <SidebarContent className="flex flex-col justify-between">
         {/* Main Navigation Area */}
         <nav className={`flex flex-col gap-1`}>
           {/* Logo and Toggle */}
-          <SidebarGroup>
+          <SidebarGroup className={`${isMobile ? "!p-0" : "p-2"}`}>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem className="flex items-center justify-between transition-all duration-150">
-                  <Link
-                    href="/home"
-                    className="flex items-center gap-1"
-                    aria-label="Go to Storewise homepage"
-                  >
-                    <Image
-                      src="/logo-png.png"
-                      alt="Storewise Logo"
-                      width={40}
-                      height={40}
-                    />
-                    <h1
-                      className={`font-semibold text-lg ${
-                        isCollapsed ? "hidden" : "block"
-                      } transition-all duration-150`}
-                    >
-                      Storewise
-                    </h1>
-                  </Link>
-                  <CustomTrigger
-                    isCollapsed={isCollapsed}
-                    onClick={toggleSidebar}
-                    aria-label={
-                      isCollapsed ? "Expand sidebar" : "Collapse sidebar"
-                    }
-                  />
+                  {!isMobile ? (
+                    <>
+                      <Link
+                        href="/home"
+                        className="flex items-center gap-1"
+                        aria-label="Go to Storewise homepage"
+                      >
+                        <Image
+                          src="/logo-png.png"
+                          alt="Storewise Logo"
+                          width={40}
+                          height={40}
+                        />
+                        <h1
+                          className={`font-semibold text-lg ${
+                            isCollapsed ? "hidden" : "block"
+                          } transition-all duration-150`}
+                        >
+                          Storewise
+                        </h1>
+                      </Link>
+                      <CustomTrigger
+                        isCollapsed={isCollapsed}
+                        aria-label={
+                          isCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                        }
+                      />
+                    </>
+                  ) : (
+                    <MobileNav />
+                  )}
                 </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
@@ -272,6 +320,8 @@ export default function AppSidebar() {
             items={navItems.main}
             isCollapsed={isCollapsed}
             pathName={pathName}
+            toggleSidebar={toggleSidebar}
+            isMobile={isMobile}
           />
 
           {/* Tools Section */}
@@ -279,6 +329,9 @@ export default function AppSidebar() {
             title="Tools"
             items={navItems.tools}
             isCollapsed={isCollapsed}
+            pathName={pathName}
+            toggleSidebar={toggleSidebar}
+            isMobile={isMobile}
           />
         </nav>
 

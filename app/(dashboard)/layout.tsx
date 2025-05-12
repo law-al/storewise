@@ -2,6 +2,9 @@ import { cookies } from "next/headers";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/app-sidebar";
+import Navbar from "@/components/Navbar";
+import { CustomTrigger } from "@/components/CustomTrigger";
+import Image from "next/image";
 
 export default async function Layout({
   children,
@@ -14,16 +17,27 @@ export default async function Layout({
   return (
     <SidebarProvider
       defaultOpen={defaultOpen}
-      className="flex gap-6"
+      className="flex"
       style={{
         "--sidebar-width": "20rem",
-        "--sidebar-width-mobile": "20rem",
       }}
     >
       <AppSidebar />
 
-      <main>
-        <SidebarTrigger className="block md:hidden" />
+      <main className="w-full bg-gray-300 md:px-2 md:py-0 md:bg-white">
+        <div className="flex items-center justify-between bg-white shadow-sm md:shadow-none h-[15vh] md:h-[10vh]">
+          <div className="flex gap-2 items-center">
+            <SidebarTrigger className="block !w-4 md:hidden" />
+            <Image
+              src="/logo-png.png"
+              alt="Brand Logo"
+              width={30}
+              height={30}
+              className="block md:hidden"
+            />
+          </div>
+          <Navbar />
+        </div>
         {children}
       </main>
     </SidebarProvider>
