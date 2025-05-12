@@ -330,4 +330,8 @@
   .auth-section {
     @apply h-full flex items-center justify-center p-4 md:p-8;
   }
+
+  .sm-button {
+    @apply border-2 border-gray-400 p-2 rounded-full cursor-pointer;
+  }
 }
