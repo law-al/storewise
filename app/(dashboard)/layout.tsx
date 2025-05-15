@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/app-sidebar";
 import Navbar from "@/components/Navbar";
-import { CustomTrigger } from "@/components/CustomTrigger";
 import Image from "next/image";
 
 export default async function Layout({
@@ -24,7 +23,7 @@ export default async function Layout({
     >
       <AppSidebar />
 
-      <main className="w-full bg-gray-300 md:px-2 md:py-0 md:bg-white">
+      <main className="w-full bg-gray-200 md:px-2 md:py-0 md:bg-white">
         <div className="flex items-center justify-between bg-white shadow-sm md:shadow-none h-[15vh] md:h-[10vh]">
           <div className="flex gap-2 items-center">
             <SidebarTrigger className="block !w-4 md:hidden" />

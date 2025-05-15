@@ -179,3 +179,61 @@ export const notifications: NotificationGroup[] = [
     ],
   },
 ];
+
+// Chart
+export const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
+
+export type TimeRange = "yearly" | "monthly" | "weekly";
+
+export const graphData: Record<
+  TimeRange,
+  { value: string; revenue: number }[]
+> = {
+  yearly: [
+    { value: "January", revenue: 7300 },
+    { value: "February", revenue: 1000 },
+    { value: "March", revenue: 1600 },
+    { value: "April", revenue: 7000 },
+    { value: "May", revenue: 6000 },
+    { value: "June", revenue: 9200 },
+    { value: "July", revenue: 1040 },
+    { value: "August", revenue: 3400 },
+    { value: "September", revenue: 6670 },
+    { value: "October", revenue: 11000 },
+    { value: "November", revenue: 1200 },
+    { value: "December", revenue: 2300 },
+  ],
+  monthly: [
+    { value: "1", revenue: 300 },
+    { value: "2", revenue: 250 },
+    { value: "3", revenue: 150 },
+    { value: "4", revenue: 200 },
+    { value: "5", revenue: 250 },
+    { value: "6", revenue: 100 },
+    { value: "7", revenue: 150 },
+    { value: "8", revenue: 250 },
+    { value: "9", revenue: 250 },
+    { value: "2", revenue: 150 },
+    { value: "10", revenue: 250 },
+    { value: "11", revenue: 350 },
+    { value: "12", revenue: 210 },
+    { value: "13", revenue: 150 },
+    // ...up to May 31
+  ],
+  weekly: [
+    { value: "Sunday", revenue: 0 },
+    { value: "Monday", revenue: 20 },
+    { value: "Tuesday", revenue: 15 },
+    { value: "Wednesday", revenue: 20 },
+    { value: "Thursday", revenue: 15 },
+    { value: "Friday", revenue: 10 },
+    { value: "Saturday", revenue: 20 },
+  ],
+};

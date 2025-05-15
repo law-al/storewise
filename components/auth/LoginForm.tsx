@@ -4,10 +4,10 @@ import { Lock, Mail } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import InputField from "./InputField";
-import { Button } from "./ui/button";
+import InputField from "../InputField";
+import { Button } from "../ui/button";
 import { useState } from "react";
-import AuthDiaLog from "./AuthDialog";
+import AuthDiaLog from "../AuthDialog";
 
 const schema = z.object({
   email: z.string().email({ message: "Invalid email address" }),

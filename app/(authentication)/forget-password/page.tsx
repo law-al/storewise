@@ -1,5 +1,5 @@
 import AuthLayout from "@/components/AuthLayout";
-import ForgotPasswordForm from "@/components/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeftDashIcon } from "lucide-react";
 import Link from "next/link";

@@ -1,5 +1,5 @@
 import AuthLayout from "@/components/AuthLayout";
-import OtpForm from "@/components/OtpForm";
+import OtpForm from "@/components/auth/OtpForm";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeftDashIcon } from "lucide-react";
 import Link from "next/link";
