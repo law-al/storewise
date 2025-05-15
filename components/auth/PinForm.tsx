@@ -11,7 +11,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
-import AuthDialog from "./AuthDialog";
+import AuthDialog from "../AuthDialog";
 
 // Define zod schema for the OTP
 const otpSchema = z.object({

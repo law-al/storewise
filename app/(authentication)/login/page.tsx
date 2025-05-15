@@ -1,6 +1,6 @@
 import AuthLayout from "@/components/AuthLayout";
-import LoginForm from "@/components/LoginForm";
-import LoginLink from "@/components/LoginLink";
+import LoginForm from "@/components/auth/LoginForm";
+import LoginLink from "@/components/auth/LoginLink";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 

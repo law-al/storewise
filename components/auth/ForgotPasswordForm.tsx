@@ -4,8 +4,8 @@ import { Mail } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import InputField from "./InputField";
-import { Button } from "./ui/button";
+import InputField from "../InputField";
+import { Button } from "../ui/button";
 
 import { useRouter } from "next/navigation";
 

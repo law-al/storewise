@@ -200,7 +200,6 @@ function MobileNav() {
 export default function AppSidebar() {
   const pathName = usePathname();
   const { state, isMobile, toggleSidebar } = useSidebar();
-  console.log(isMobile);
   const isCollapsed = state === "collapsed";
 
   return (

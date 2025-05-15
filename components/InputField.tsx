@@ -1,5 +1,6 @@
 import { Eye, EyeClosed } from "lucide-react";
 import React, { useState } from "react";
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
 export default function InputField({
   label,
@@ -13,7 +14,7 @@ export default function InputField({
   label: string;
   name: string;
   type?: string;
-  register: any;
+  register: UseFormRegister<FieldValues>;
   error?: string;
   icon: React.ReactNode;
   placeholder: string;
@@ -42,7 +43,6 @@ export default function InputField({
           type={
             type === "password" ? (isPasswordShown ? "text" : "password") : type
           }
-          name={name}
           placeholder={placeholder}
           {...register(name)}
           className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full placeholder:text-sm placeholder:md:text-[18px]"
