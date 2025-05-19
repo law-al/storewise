@@ -4,7 +4,7 @@ import { Lock } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import InputField from "../InputField";
+import InputField from "../ui/InputField";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import AuthDiaLog from "../AuthDialog";

@@ -1,4 +1,4 @@
-import AuthLayout from "@/components/AuthLayout";
+import AuthLayout from "@/components/layout/AuthLayout";
 import RegisterForm from "@/components/auth/RegisterForm";
 import Link from "next/link";
 

@@ -29,7 +29,7 @@ export default function ProfitBreakdownComponent() {
     chartData[0].product1 + chartData[0].product2 + chartData[0].product3
   );
 
-  console.log(chartConfig.product1.label);
+  // console.log(chartConfig.product1.label);
 
   function getPercent(value: number): number {
     const result = ((value / totalProfit) * 100).toFixed(2);

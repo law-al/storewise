@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/app-sidebar";
-import Navbar from "@/components/Navbar";
+import AppSidebar from "@/components/layout/app-sidebar";
+import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
 
 export default async function Layout({

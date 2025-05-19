@@ -23,15 +23,15 @@ function getWeeklyRange(date: Date = new Date()): string {
 
 export default function DatePicker() {
   const [options, setOptions] = useState("light");
-  const currentDate = Date.now();
-  console.log(
-    new Date(currentDate).toLocaleDateString("en-US", {
-      day: "2-digit",
-      weekday: "long",
-    })
-  );
+  // const currentDate = Date.now();
+  // console.log(
+  //   new Date(currentDate).toLocaleDateString("en-US", {
+  //     day: "2-digit",
+  //     weekday: "long",
+  //   })
+  // );
 
-  console.log(options);
+  // console.log(options);
 
   return (
     <div className="flex items-center justify-between w-full md:w-[300px] border border-gray-300 px-4 py-1 rounded-full">

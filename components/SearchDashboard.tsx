@@ -2,12 +2,7 @@ import Form from "next/form";
 
 import { formatDistance, subDays } from "date-fns";
 
-import {
-  SheetClose,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { SheetClose, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Dot, MoreVertical, Search, ShoppingBag, X } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -40,7 +35,8 @@ export default function SearchDashboard() {
             <span className="sr-only">Close</span>
           </SheetClose>
         </SheetTitle>
-        <SheetDescription>
+
+        <div>
           <div className="mb-3">
             <p className="mb-2">I&apos;m searching for</p>
             <div className="flex flex-wrap items-center gap-2">
@@ -122,7 +118,7 @@ export default function SearchDashboard() {
               </div>
             ))}
           </div>
-        </SheetDescription>
+        </div>
       </SheetHeader>
     </>
   );

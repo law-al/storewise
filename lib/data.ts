@@ -237,3 +237,141 @@ export const graphData: Record<
     { value: "Saturday", revenue: 20 },
   ],
 };
+
+// PRODUCTS
+
+export type Products = {
+  productId: string;
+  available: boolean;
+  item: {
+    name: string;
+    image: string;
+    price: number;
+  };
+  status: "published" | "draft" | "sold out";
+  sales: number;
+  revenue: number;
+};
+
+export const products = [
+  {
+    productId: "#001",
+    available: true,
+    item: {
+      name: "Nike Air Max 270",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 150,
+    },
+    status: "published",
+    sales: 80,
+    revenue: 12000,
+  },
+  {
+    productId: "#002",
+    available: false,
+    item: {
+      name: "Adidas Ultraboost",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 180,
+    },
+    status: "sold out",
+    sales: 50,
+    revenue: 9000,
+  },
+  {
+    productId: "#003",
+    available: true,
+    item: {
+      name: "Puma RS-X",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 120,
+    },
+    status: "published",
+    sales: 100,
+    revenue: 12000,
+  },
+  {
+    productId: "#004",
+    available: true,
+    item: {
+      name: "New Balance 990v5",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 175,
+    },
+    status: "draft",
+    sales: 20,
+    revenue: 3500,
+  },
+  {
+    productId: "#005",
+    available: false,
+    item: {
+      name: "Reebok Classic Leather",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 90,
+    },
+    status: "published",
+    sales: 60,
+    revenue: 5400,
+  },
+  {
+    productId: "#006",
+    available: true,
+    item: {
+      name: "Asics Gel-Kayano",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 160,
+    },
+    status: "published",
+    sales: 45,
+    revenue: 7200,
+  },
+  {
+    productId: "#007",
+    available: true,
+    item: {
+      name: "Under Armour HOVR",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 130,
+    },
+    status: "published",
+    sales: 70,
+    revenue: 9100,
+  },
+  {
+    productId: "#008",
+    available: false,
+    item: {
+      name: "Vans Old Skool",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 70,
+    },
+    status: "sold out",
+    sales: 200,
+    revenue: 14000,
+  },
+  {
+    productId: "#009",
+    available: true,
+    item: {
+      name: "Converse Chuck Taylor",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 60,
+    },
+    status: "published",
+    sales: 150,
+    revenue: 9000,
+  },
+  {
+    productId: "#010",
+    available: true,
+    item: {
+      name: "Salomon XT-6",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 200,
+    },
+    status: "published",
+    sales: 30,
+    revenue: 6000,
+  },
+];
