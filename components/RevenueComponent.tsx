@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import TabbedComponent from "./TabbedComponent";
+import TabbedComponent from "./utils/TabbedComponent";
 import {
   Area,
   AreaChart,

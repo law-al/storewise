@@ -24,14 +24,14 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CustomTrigger } from "./CustomTrigger";
+import { CustomTrigger } from "../ui/CustomTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "./ui/collapsible";
+} from "../ui/collapsible";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
 

@@ -24,13 +24,15 @@ export default function StatCard({
       )}
     >
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 md:gap-2">
           <div
             className={`w-[40px] h-[40px] rounded-full ${iconBgColor} flex items-center justify-center`}
           >
             <Icon className="text-white" size={20} />
           </div>
-          <p className="font-semibold text-gray-500">{title}</p>
+          <p className="text-sm md:text-[16px] font-semibold text-gray-500">
+            {title}
+          </p>
         </div>
         <div className="w-[40px] h-[40px] flex items-center justify-center rounded-full bg-gray-300/30">
           <Image src="/top-right.png" alt="" width={13} height={13} />

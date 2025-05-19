@@ -1,4 +1,4 @@
-import AuthLayout from "@/components/AuthLayout";
+import AuthLayout from "@/components/layout/AuthLayout";
 import SetPasswordForm from "@/components/auth/SetPasswordForm";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeftDashIcon } from "lucide-react";

@@ -16,7 +16,7 @@ export default function InputField({
   type?: string;
   register: UseFormRegister<FieldValues>;
   error?: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   placeholder: string;
 }) {
   if (error) {
@@ -30,7 +30,7 @@ export default function InputField({
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm md:text-[18px] capitalize mb-1" htmlFor={name}>
+      <label className="text-sm md:text-[14px] capitalize mb-1" htmlFor={name}>
         {label}
       </label>
       <div
@@ -45,7 +45,7 @@ export default function InputField({
           }
           placeholder={placeholder}
           {...register(name)}
-          className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full placeholder:text-sm placeholder:md:text-[18px]"
+          className="p-2 ring ring-transparent focus:outline-none focus:ring-0 focus:border-transparent w-full placeholder:text-sm placeholder:md:text-[14px]"
         />
 
         {(name === "password" || name === "confirm") && (

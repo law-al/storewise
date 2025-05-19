@@ -48,7 +48,7 @@ export default function NotificationDashboard() {
         </div>
 
         <div className="flex-1 flex gap-0.5 flex-col overflow-hidden">
-          <h2 className="font-semibold text-gray-600">{message.title}</h2>
+          <h2 className="font-semibold text-black">{message.title}</h2>
           <div className="flex items-start gap-1">
             <p
               className={`flex-2 text-sm text-gray-500 ${
@@ -66,16 +66,18 @@ export default function NotificationDashboard() {
   }
 
   return (
-    <SheetHeader>
-      <SheetTitle className="flex items-center justify-between mb-3">
-        <p>Notification</p>
+    <>
+      <SheetHeader>
+        <SheetTitle className="flex items-center justify-between mb-3">
+          <p>Notification</p>
 
-        <SheetClose className="rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100">
-          <X size={12} className="h-4 w-4" />
-          <span className="sr-only">Close</span>
-        </SheetClose>
-      </SheetTitle>
-      <div>
+          <SheetClose className="rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100">
+            <X size={12} className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </SheetClose>
+        </SheetTitle>
+      </SheetHeader>
+      <div className="px-4">
         <span className="flex items-center justify-between mb-6">
           <span className="flex items-center">
             <Button
@@ -130,6 +132,6 @@ export default function NotificationDashboard() {
           ))}
         </div>
       </div>
-    </SheetHeader>
+    </>
   );
 }

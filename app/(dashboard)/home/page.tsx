@@ -1,5 +1,5 @@
-import DatePicker from "@/components/DatePicker";
-import StatCard from "@/components/StatCard";
+import DatePicker from "@/components/utils/DatePicker";
+import StatCard from "@/components/utils/StatCard";
 import React from "react";
 import { ArrowRightIcon, ShoppingBag, User, Users2 } from "lucide-react";
 import RevenueComponent from "@/components/RevenueComponent";
@@ -10,7 +10,7 @@ import ActivityComponent from "@/components/ActivityComponent";
 
 export default function HomePage() {
   return (
-    <section className="grid m-2 md:m-0 rounded-md md:rounded-none p-6 md:p-0 grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 bg-white">
+    <section className="grid m-2 md:m-0 rounded-md md:rounded-none p-2 md:p-0 grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 bg-white">
       {/* GRID 1 */}
       <div className=" py-2">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-4">

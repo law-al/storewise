@@ -28,7 +28,7 @@ const chartConfig = {
 
 export default function StatusProductComponent() {
   const isMobile = useIsMobile();
-  console.log(isMobile);
+  // console.log(isMobile);
   return (
     <div className="bg-white p-6 rounded-lg shadow-sm border-2 border-gray-300">
       <div className="mb-4">

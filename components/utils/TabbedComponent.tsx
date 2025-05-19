@@ -14,12 +14,12 @@ export default function TabbedComponent({
   onSetActiveTab: (i: number) => void;
 }) {
   return (
-    <div className="flex items-center p-0.5 gap-2 rounded-full bg-gray-300/30">
+    <div className="flex items-center p-0.5 rounded-full bg-gray-300/30 md:w-fit">
       {options.map((option, i) => (
         <div
           key={i}
           className={cn(
-            "px-3 md:px-4 py-1 md:py-2 rounded-full cursor-pointer transition-all duration-100",
+            "px-4 md:px-5 py-2.5 md:py-3 rounded-full cursor-pointer transition-all duration-100 ease-out",
             activeTab === i && "bg-themeOrange-300 text-white shadow-md"
           )}
           onClick={() => onSetActiveTab(i)}
