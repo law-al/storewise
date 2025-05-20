@@ -5,41 +5,142 @@ import ExportButton from "@/components/utils/ExportButton";
 import StatCard from "@/components/utils/StatCard";
 import TabbedComponent from "@/components/utils/TabbedComponent";
 import { LayoutGrid, List, ShoppingBag, Users2 } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import PaginationComponent from "@/components/PaginationComponent";
 import ProductTable from "@/components/tables/ProductTable";
-import { products, Products } from "@/lib/data";
 import ProductGrid from "@/components/ProductGrid";
+import { Products } from "@/lib/data";
 
 const options = [<List key={1} size={18} />, <LayoutGrid key={2} size={18} />];
+
+const products: Products[] = [
+  {
+    productId: "#001",
+    available: true,
+    item: {
+      name: "Nike Air Max 270",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 150,
+    },
+    status: "published",
+    sales: 80,
+    revenue: 12000,
+  },
+  {
+    productId: "#002",
+    available: false,
+    item: {
+      name: "Adidas Ultraboost",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 180,
+    },
+    status: "sold out",
+    sales: 50,
+    revenue: 9000,
+  },
+  {
+    productId: "#003",
+    available: true,
+    item: {
+      name: "Puma RS-X",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 120,
+    },
+    status: "published",
+    sales: 100,
+    revenue: 12000,
+  },
+  {
+    productId: "#004",
+    available: true,
+    item: {
+      name: "New Balance 990v5",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 175,
+    },
+    status: "draft",
+    sales: 20,
+    revenue: 3500,
+  },
+  {
+    productId: "#005",
+    available: false,
+    item: {
+      name: "Reebok Classic Leather",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 90,
+    },
+    status: "published",
+    sales: 60,
+    revenue: 5400,
+  },
+  {
+    productId: "#006",
+    available: true,
+    item: {
+      name: "Asics Gel-Kayano",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 160,
+    },
+    status: "published",
+    sales: 45,
+    revenue: 7200,
+  },
+  {
+    productId: "#007",
+    available: true,
+    item: {
+      name: "Under Armour HOVR",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 130,
+    },
+    status: "published",
+    sales: 70,
+    revenue: 9100,
+  },
+  {
+    productId: "#008",
+    available: false,
+    item: {
+      name: "Vans Old Skool",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 70,
+    },
+    status: "sold out",
+    sales: 200,
+    revenue: 14000,
+  },
+  {
+    productId: "#009",
+    available: true,
+    item: {
+      name: "Converse Chuck Taylor",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 60,
+    },
+    status: "published",
+    sales: 150,
+    revenue: 9000,
+  },
+  {
+    productId: "#010",
+    available: true,
+    item: {
+      name: "Salomon XT-6",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 200,
+    },
+    status: "published",
+    sales: 30,
+    revenue: 6000,
+  },
+];
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<number>(0);
 
-  const [currentItems, setCurrentItems] = useState<Products[]>([]);
-
   function handleActive(i: number) {
     setActiveTab(i);
-  }
-
-  console.log(activeTab);
-
-  // Goes to the pagination component
-  const handleSetCurrentItem = useCallback((items: Products[]) => {
-    setCurrentItems(items);
-  }, []); // works like caching
-  //without useCallback, Every time the parent re-renders, a new version of handleSetCurrentItem is created.
-  // The child element thinks it is a new props which re activates the useEffect via the dependancies and this cause useEffect to run always.
-
-  // Goes to the producttable component
-  function handleAvailable(available: boolean, id: string) {
-    setCurrentItems((prev) =>
-      prev.map((product) =>
-        product.productId === id
-          ? { ...product, available: !available }
-          : product
-      )
-    );
   }
 
   return (
@@ -86,26 +187,25 @@ export default function HomePage() {
         </div>
 
         <div className="mb-6 md:mb-4">
-          {activeTab === 0 && (
-            <ProductTable
-              currentItems={currentItems}
-              handleAvailable={handleAvailable}
-            />
-          )}
+          <PaginationComponent items={products}>
+            {({ currentItems, handleAvailable }) => (
+              <>
+                {activeTab === 0 && (
+                  <ProductTable
+                    currentItems={currentItems}
+                    handleAvailable={handleAvailable}
+                  />
+                )}
 
-          {activeTab === 1 && (
-            <ProductGrid
-              currentItems={currentItems}
-              handleAvailable={handleAvailable}
-            />
-          )}
-        </div>
-
-        <div className="">
-          <PaginationComponent
-            items={products}
-            handleSetCurrentItem={handleSetCurrentItem}
-          />
+                {activeTab === 1 && (
+                  <ProductGrid
+                    currentItems={currentItems}
+                    handleAvailable={handleAvailable}
+                  />
+                )}
+              </>
+            )}
+          </PaginationComponent>
         </div>
       </div>
     </section>

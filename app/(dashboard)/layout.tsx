@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/layout/app-sidebar";
 import Navbar from "@/components/layout/Navbar";
@@ -16,28 +15,28 @@ export default async function Layout({
   return (
     <SidebarProvider
       defaultOpen={defaultOpen}
-      className="flex"
-      style={{
-        "--sidebar-width": "20rem",
-      }}
+      className="flex min-h-screen"
+      style={{ "--sidebar-width": "20rem" }}
     >
       <AppSidebar />
-
-      <main className="w-full bg-gray-200 md:px-2 md:py-0 md:bg-white">
-        <div className="flex items-center justify-between bg-white shadow-sm md:shadow-none h-[15vh] md:h-[10vh]">
-          <div className="flex gap-2 items-center">
-            <SidebarTrigger className="block !w-4 md:hidden" />
+      <main className="flex-1 bg-gray-200 md:bg-white md:p-4">
+        <header className="flex items-center justify-between bg-white h-16 px-4 md:h-14 md:px-0">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger
+              className="md:hidden w-6 h-6"
+              aria-label="Toggle sidebar"
+            />
             <Image
               src="/logo-png.png"
-              alt="Brand Logo"
+              alt="Storewise Logo"
               width={30}
               height={30}
-              className="block md:hidden"
+              className="md:hidden"
             />
           </div>
           <Navbar />
-        </div>
-        {children}
+        </header>
+        <div className="p-4 md:p-0">{children}</div>
       </main>
     </SidebarProvider>
   );

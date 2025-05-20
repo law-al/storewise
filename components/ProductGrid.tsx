@@ -6,13 +6,13 @@ import { Separator } from "./ui/separator";
 import { Products } from "@/lib/data";
 import ProductDropdown from "./utils/ProductDropdown";
 
-export default function ProductGrid({
+const ProductGrid = ({
   currentItems,
   handleAvailable,
 }: {
   currentItems: Products[];
   handleAvailable: (available: boolean, id: string) => void;
-}) {
+}) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {currentItems.map((product) => (
@@ -65,4 +65,6 @@ export default function ProductGrid({
       ))}
     </div>
   );
-}
+};
+
+export default React.memo(ProductGrid);

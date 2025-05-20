@@ -1,10 +1,7 @@
+import React from "react";
 import { TableHead, TableHeader, TableRow } from "../ui/table";
 
-export default function GenerateTableHeader({
-  headings,
-}: {
-  headings: string[];
-}) {
+const GenerateTableHeader = ({ headings }: { headings: string[] }) => {
   return (
     <TableHeader>
       <TableRow className="bg-gray-300">
@@ -21,4 +18,6 @@ export default function GenerateTableHeader({
       </TableRow>
     </TableHeader>
   );
-}
+};
+
+export default React.memo(GenerateTableHeader);

@@ -26,7 +26,7 @@ export default function ProductDropdown({
 }: {
   orientation?: "vertical" | "horizontal";
   product: Products;
-  handleAvailable: (available: boolean, id: string) => void;
+  handleAvailable?: (available: boolean, id: string) => void;
 }) {
   return (
     <>

@@ -3,13 +3,9 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
-
 import {
   Select,
   SelectContent,
@@ -17,75 +13,121 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ArrowLeft, ArrowLeftCircle, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useState, useMemo, JSX } from "react";
 
-export default function PaginationComponent({ items, handleSetCurrentItem }) {
+// Generic PaginationProps to handle any item type
+type PaginationProps<T> = {
+  items: T[];
+  children: (props: {
+    currentItems: T[];
+    handleAvailable?: (available: boolean, id: string) => void | undefined;
+  }) => JSX.Element;
+};
+
+// Generic PaginationComponent
+export default function PaginationComponent<T>({
+  items: initialItems,
+  children,
+}: PaginationProps<T>) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage, setItemPerPage] = useState("5");
+  const [items, setItems] = useState(initialItems);
 
+  // Update items when initialItems changes (e.g., on page navigation or data update)
+  useMemo(() => {
+    setItems(initialItems);
+    setCurrentPage(1); // Reset to first page when items change
+  }, [initialItems]);
+
+  // Calculate paginated items
   const indexOfLastItem = currentPage * +itemPerPage;
   const indexOfFirstItem = indexOfLastItem - +itemPerPage;
+  const currentItems = useMemo(
+    () => items.slice(indexOfFirstItem, indexOfLastItem),
+    [items, indexOfFirstItem, indexOfLastItem]
+  );
 
-  useEffect(() => {
-    const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
-    handleSetCurrentItem(currentItems);
-  }, [handleSetCurrentItem, indexOfFirstItem, indexOfLastItem, items]);
+  // Handle product availability toggle (optional, for datasets with an 'available' field)
+  const handleAvailable = (available: boolean, id: string) => {
+    setItems((prev) =>
+      prev.map((item: any) =>
+        item.productId === id || item.id === id
+          ? { ...item, available: !available }
+          : item
+      )
+    );
+  };
+
+  // Handle page navigation
+  const totalPages = Math.ceil(items.length / +itemPerPage);
+  const handlePrevious = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   return (
-    <div className="w-full flex flex-col gap-2 md:gap-0 md:flex-row items-center justify-between">
-      <Pagination className="justify-center md:!justify-start">
-        <PaginationContent className="flex items-center gap-3">
-          <PaginationItem className="border border-gray-300 rounded-full p-2">
-            <ArrowLeft />
-          </PaginationItem>
-          {Array.from(
-            { length: Math.ceil(items.length / +itemPerPage) },
-            (_, i) => (
-              <PaginationItem key={i} className="">
+    <div className="flex flex-col">
+      <div className="h-full flex flex-col justify-between border border-red-400">
+        {/* Render paginated items and pass handleAvailable */}
+        {children({ currentItems, handleAvailable })}
+      </div>
+
+      <div className="flex items-center justify-between">
+        <Pagination className="w-fit mx-0">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationLink
+                onClick={handlePrevious}
+                className="cursor-pointer"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </PaginationLink>
+            </PaginationItem>
+
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i}>
                 <PaginationLink
                   onClick={() => setCurrentPage(i + 1)}
                   href="#"
-                  className="border border-gray-300 rounded-full p-2"
-                  isActive={currentPage === i + 1}
+                  className={`${currentPage === i + 1 ? "bg-gray-200" : ""}`}
                 >
                   {i + 1}
                 </PaginationLink>
               </PaginationItem>
-            )
-          )}
-          {/* <PaginationItem>
-            <PaginationPrevious href="#" />
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
-          </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>*/}
-          <PaginationItem className="border border-gray-300 rounded-full p-2">
-            <ArrowRight />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            ))}
 
-      <div className="flex-1 flex items-center gap-2">
-        <p className="text-sm">show</p>
+            <PaginationItem>
+              <PaginationLink onClick={handleNext} className="cursor-pointer">
+                <ArrowRight className="h-4 w-4" />
+              </PaginationLink>
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
 
-        <Select value={itemPerPage} onValueChange={setItemPerPage}>
-          <SelectTrigger className="w-fit rounded-full border-gray-300 ring-gray-300">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="5">5</SelectItem>
-            <SelectItem value="10">10</SelectItem>
-            <SelectItem value="20">20</SelectItem>
-            <SelectItem value="30">30</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <p>from</p>
-        <span className="font-semibold">180</span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-500">Show</span>
+          <Select
+            value={itemPerPage}
+            onValueChange={(value) => {
+              setItemPerPage(value);
+              setCurrentPage(1); // Reset to first page when changing items per page
+            }}
+          >
+            <SelectTrigger className="w-16 h-8">
+              <SelectValue placeholder="5" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="5">5</SelectItem>
+              <SelectItem value="10">10</SelectItem>
+              <SelectItem value="20">20</SelectItem>
+              <SelectItem value="30">30</SelectItem>
+            </SelectContent>
+          </Select>
+          <span className="text-sm text-gray-500">from {items.length}</span>
+        </div>
       </div>
     </div>
   );

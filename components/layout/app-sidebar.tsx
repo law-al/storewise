@@ -34,6 +34,7 @@ import {
 } from "../ui/collapsible";
 import { usePathname } from "next/navigation";
 import Navbar from "./Navbar";
+import React from "react";
 
 interface Items {
   title: string;
@@ -58,8 +59,8 @@ const navItems = {
       ariaLabel: "Open inbox",
     },
     {
-      title: "Calendar",
-      url: "/calendar",
+      title: "Order",
+      url: "/order",
       icon: Calendar,
       ariaLabel: "View calendar",
     },
@@ -197,7 +198,7 @@ function MobileNav() {
   );
 }
 
-export default function AppSidebar() {
+const AppSidebar = () => {
   const pathName = usePathname();
   const { state, isMobile, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
@@ -399,4 +400,6 @@ export default function AppSidebar() {
       </SidebarContent>
     </Sidebar>
   );
-}
+};
+
+export default React.memo(AppSidebar);

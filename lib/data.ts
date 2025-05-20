@@ -248,12 +248,12 @@ export type Products = {
     image: string;
     price: number;
   };
-  status: "published" | "draft" | "sold out";
+  status: "published" | "sold out" | "draft";
   sales: number;
   revenue: number;
 };
 
-export const products = [
+export const products: Products[] = [
   {
     productId: "#001",
     available: true,
@@ -373,5 +373,132 @@ export const products = [
     status: "published",
     sales: 30,
     revenue: 6000,
+  },
+];
+
+// ORDERS
+
+export type Orders = {
+  id: string;
+  product: {
+    name: string;
+    image: string;
+    price: number;
+  };
+  status: "completed" | "pending" | "shipped" | "processing" | "cancelled";
+  totalItems: number;
+  totalPrice: number;
+};
+
+export const orders: Orders[] = [
+  {
+    id: "#001",
+    product: {
+      name: "Nike Air Max 270",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 150,
+    },
+    status: "completed",
+    totalItems: 1,
+    totalPrice: 150,
+  },
+  {
+    id: "#002",
+    product: {
+      name: "Adidas Ultraboost 21",
+      image: "https://placehold.co/400/FF0000/FFF.png",
+      price: 180,
+    },
+    status: "pending",
+    totalItems: 2,
+    totalPrice: 360,
+  },
+  {
+    id: "#003",
+    product: {
+      name: "Puma RS-X3",
+      image: "https://placehold.co/400/00FF00/FFF.png",
+      price: 120,
+    },
+    status: "shipped",
+    totalItems: 1,
+    totalPrice: 120,
+  },
+  {
+    id: "#004",
+    product: {
+      name: "New Balance Fresh Foam",
+      image: "https://placehold.co/400/0000FF/FFF.png",
+      price: 140,
+    },
+    status: "completed",
+    totalItems: 3,
+    totalPrice: 420,
+  },
+  {
+    id: "#005",
+    product: {
+      name: "Reebok Classic Leather",
+      image: "https://placehold.co/400/FFFF00/FFF.png",
+      price: 90,
+    },
+    status: "cancelled",
+    totalItems: 1,
+    totalPrice: 90,
+  },
+  {
+    id: "#006",
+    product: {
+      name: "Asics Gel-Kayano 27",
+      image: "https://placehold.co/400/FF00FF/FFF.png",
+      price: 160,
+    },
+    status: "processing",
+    totalItems: 2,
+    totalPrice: 320,
+  },
+  {
+    id: "#007",
+    product: {
+      name: "Under Armour HOVR",
+      image: "https://placehold.co/400/00FFFF/FFF.png",
+      price: 130,
+    },
+    status: "shipped",
+    totalItems: 1,
+    totalPrice: 130,
+  },
+  {
+    id: "#008",
+    product: {
+      name: "Vans Old Skool",
+      image: "https://placehold.co/400/FFA500/FFF.png",
+      price: 70,
+    },
+    status: "completed",
+    totalItems: 2,
+    totalPrice: 140,
+  },
+  {
+    id: "#009",
+    product: {
+      name: "Converse Chuck Taylor",
+      image: "https://placehold.co/400/800080/FFF.png",
+      price: 60,
+    },
+    status: "pending",
+    totalItems: 1,
+    totalPrice: 60,
+  },
+  {
+    id: "#010",
+    product: {
+      name: "Saucony Shadow 6000",
+      image: "https://placehold.co/400/008000/FFF.png",
+      price: 110,
+    },
+    status: "completed",
+    totalItems: 2,
+    totalPrice: 220,
   },
 ];

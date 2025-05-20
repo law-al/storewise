@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 import GenerateTableHeader from "../utils/GenerateTableHeader";
 import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
-import { Products } from "@/lib/data";
+import { Orders, Products } from "@/lib/data";
 import ProductDropdown from "../utils/ProductDropdown";
 import React from "react";
 
@@ -18,66 +18,54 @@ const tableHeadings = [
   "action",
 ];
 
-const ProductTable = ({
+const OrderTable = ({
   currentItems,
   handleAvailable,
 }: {
-  currentItems: Products[];
-  handleAvailable: (available: boolean, id: string) => void;
+  currentItems: Orders[];
+  handleAvailable?: (available: boolean, id: string) => void;
 }) => {
   function generateTableRow() {
     return (
       <>
         {currentItems.map((product) => (
-          <TableRow key={product.productId} className="">
-            <TableCell>{product.productId}</TableCell>
-            <TableCell>
-              <Switch
-                onClick={() =>
-                  handleAvailable(product.available, product.productId)
-                }
-                checked={product.available}
-                id={product.productId}
-                className={
-                  product.available ? "!bg-themeOrange-300" : "!bg-gray-300"
-                }
-              />
-            </TableCell>
+          <TableRow key={product.id} className="">
+            <TableCell>{product.id}</TableCell>
             <TableCell className="flex items-center gap-2 w-[250px] md:w-full">
               <Image
-                src={product.item.image}
+                src={product.product.image}
                 alt="product images"
                 width={60}
                 height={60}
                 className="rounded-sm"
               />
 
-              <p className="">{product.item.name}</p>
+              <p className="">{product.product.name}</p>
             </TableCell>
             <TableCell className="text-center">
               <p
                 className={cn(
                   "px-3 py-1 w-fit block capitalize rounded-full font-medium",
-                  product.status === "published" &&
+                  product.status === "completed" &&
                     "bg-themeGreen-300/30 text-themeGreen-500",
-                  product.status === "sold out" &&
+                  product.status === "pending" &&
                     "bg-themeOrange-300/30 text-themeOrange-500",
-                  product.status === "draft" &&
+                  product.status === "shipped" &&
                     "bg-themeError-300/30 text-themeError-500"
                 )}
               >
                 {product.status}
               </p>
             </TableCell>
-            <TableCell>${product.item.price.toLocaleString()}</TableCell>
-            <TableCell>${product.sales}</TableCell>
-            <TableCell>${product.revenue.toLocaleString()}</TableCell>
-            <TableCell className="">
+            <TableCell>${product.product.price.toLocaleString()}</TableCell>
+            <TableCell>${product.totalItems}</TableCell>
+            <TableCell>${product.totalPrice.toLocaleString()}</TableCell>
+            {/* <TableCell className="">
               <ProductDropdown
                 product={product}
                 handleAvailable={handleAvailable}
               />
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         ))}
       </>
@@ -96,4 +84,4 @@ const ProductTable = ({
   );
 };
 
-export default React.memo(ProductTable);
+export default React.memo(OrderTable);

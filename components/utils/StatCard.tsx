@@ -3,9 +3,6 @@ import { BadgeDollarSignIcon, ChartLine } from "lucide-react"; // Import needed 
 import Image from "next/image";
 
 export default function StatCard({
-  borderRight = false,
-  borderLeft = false,
-  borderBottom = false,
   title = "Total revenue",
   value = "$17,000",
   percentage = "12.3%",
@@ -16,11 +13,8 @@ export default function StatCard({
   return (
     <div
       className={cn(
-        "p-4 min-h-[200px] flex flex-col justify-between outline-2 outline-gray-300", // Changed py-3 to p-4 for consistent padding
+        "p-4 min-h-[200px] flex flex-col justify-between outline-2 outline-gray-300" // Changed py-3 to p-4 for consistent padding
         // The border logic was incorrect - don't use "border-none" as fallback
-        borderBottom && "border-b-2 border-b-gray-300",
-        borderRight && "border-r-2 border-r-gray-300",
-        borderLeft && "border-l-2 border-l-gray-300"
       )}
     >
       <div className="flex items-center justify-between mb-3">
