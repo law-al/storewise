@@ -22,7 +22,7 @@ export default function ProductTable({
   handleAvailable,
 }: {
   currentItems: Products[];
-  handleAvailable: (available: boolean, id: string) => void;
+  handleAvailable?: (available: boolean, id: string) => void;
 }) {
   function generateTableRow() {
     return (

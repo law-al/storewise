@@ -24,7 +24,9 @@ export default function TabbedComponent({
           )}
           onClick={() => onSetActiveTab(i)}
         >
-          <span className={cn("text-sm font-semibold")}>{option}</span>
+          <span className={cn("text-sm font-semibold capitalize")}>
+            {option}
+          </span>
         </div>
       ))}
     </div>
