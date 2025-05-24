@@ -58,8 +58,8 @@ const navItems = {
       ariaLabel: "Open inbox",
     },
     {
-      title: "Calendar",
-      url: "/calendar",
+      title: "Order",
+      url: "/order",
       icon: Calendar,
       ariaLabel: "View calendar",
     },

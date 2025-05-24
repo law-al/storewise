@@ -253,7 +253,7 @@ export type Products = {
   revenue: number;
 };
 
-export const products = [
+export const products: Products[] = [
   {
     productId: "#001",
     available: true,
@@ -373,5 +373,243 @@ export const products = [
     status: "published",
     sales: 30,
     revenue: 6000,
+  },
+];
+
+// Orders
+export type OrderPhase =
+  | "pending" // Order placed, waiting for payment/processing
+  | "processing" // Payment confirmed, preparing order
+  | "shipped" // Order dispatched for delivery
+  | "delivered" // Order successfully delivered
+  | "cancelled" // Order cancelled by customer/system
+  | "returned"; // Order returned by customer
+
+export type DeliveryStatus =
+  | "pending" // Not started yet
+  | "processing" // Preparing/packaging
+  | "shipped" // In transit
+  | "delivered" // Successfully delivered
+  | "failed" // Delivery attempt failed
+  | "cancelled"; // Delivery cancelled
+
+export type PaymentStatus =
+  | "pending" // Payment not yet processed
+  | "paid" // Payment successful
+  | "failed" // Payment failed
+  | "refunded"; // Payment refunded
+
+export type PaymentType =
+  | "credit card"
+  | "debit card"
+  | "paypal"
+  | "apple pay"
+  | "google pay"
+  | "bank transfer"
+  | "cash on delivery";
+
+export type Orders = {
+  id: string;
+  product: {
+    name: string;
+    image: string;
+    price: number;
+  };
+  status: OrderPhase;
+  deliveryStatus: DeliveryStatus;
+  paymentStatus: PaymentStatus;
+
+  orderDate?: string; // 🆕 When order was placed
+  // 🆕 New payment and pricing fields
+  paymentType: PaymentType;
+  subtotal: number; // Price before tax and after discount
+  taxPercent: number; // Tax percentage (e.g., 8.5 for 8.5%)
+  taxAmount: number; // Calculated tax amount
+  discount: number; // Discount amount
+
+  totalItems: number;
+  totalPrice: number; // Final amount (subtotal + tax - discount)
+};
+
+export const orders: Orders[] = [
+  {
+    id: "#001",
+    product: {
+      name: "Nike Air Max 270",
+      image: "https://placehold.co/400/000000/FFF.png",
+      price: 150,
+    },
+    status: "processing",
+    deliveryStatus: "processing",
+    paymentStatus: "paid",
+    paymentType: "credit card",
+    subtotal: 150,
+    taxPercent: 8.5,
+    taxAmount: 12.75,
+    discount: 0,
+    totalItems: 1,
+    totalPrice: 162.75, // 150 + 12.75 - 0
+  },
+  {
+    id: "#002",
+    product: {
+      name: "Adidas Ultraboost 21",
+      image: "https://placehold.co/400/FF0000/FFF.png",
+      price: 180,
+    },
+    status: "processing",
+    deliveryStatus: "processing",
+    paymentStatus: "paid",
+    paymentType: "paypal",
+    subtotal: 360,
+    taxPercent: 8.5,
+    taxAmount: 30.6,
+    discount: 20, // $20 discount
+    totalItems: 2,
+    totalPrice: 370.6, // 360 + 30.60 - 20
+  },
+  {
+    id: "#003",
+    product: {
+      name: "Puma RS-X3",
+      image: "https://placehold.co/400/00FF00/FFF.png",
+      price: 120,
+    },
+    status: "cancelled",
+    deliveryStatus: "cancelled",
+    paymentStatus: "refunded",
+    paymentType: "debit card",
+    subtotal: 120,
+    taxPercent: 8.5,
+    taxAmount: 10.2,
+    discount: 0,
+    totalItems: 1,
+    totalPrice: 130.2, // 120 + 10.20 - 0
+  },
+  {
+    id: "#004",
+    product: {
+      name: "New Balance Fresh Foam",
+      image: "https://placehold.co/400/0000FF/FFF.png",
+      price: 140,
+    },
+    status: "pending",
+    deliveryStatus: "pending",
+    paymentStatus: "pending",
+    paymentType: "cash on delivery",
+    subtotal: 420,
+    taxPercent: 8.5,
+    taxAmount: 35.7,
+    discount: 50, // $50 bulk discount
+    totalItems: 3,
+    totalPrice: 405.7, // 420 + 35.70 - 50
+  },
+  {
+    id: "#005",
+    product: {
+      name: "Reebok Classic Leather",
+      image: "https://placehold.co/400/FFFF00/FFF.png",
+      price: 90,
+    },
+    status: "delivered",
+    deliveryStatus: "delivered",
+    paymentStatus: "paid",
+    paymentType: "apple pay",
+    subtotal: 90,
+    taxPercent: 8.5,
+    taxAmount: 7.65,
+    discount: 10, // $10 first-time buyer discount
+    totalItems: 1,
+    totalPrice: 87.65, // 90 + 7.65 - 10
+  },
+  {
+    id: "#006",
+    product: {
+      name: "Asics Gel-Kayano 27",
+      image: "https://placehold.co/400/FF00FF/FFF.png",
+      price: 160,
+    },
+    status: "shipped",
+    deliveryStatus: "shipped",
+    paymentStatus: "paid",
+    paymentType: "google pay",
+    subtotal: 320,
+    taxPercent: 8.5,
+    taxAmount: 27.2,
+    discount: 25, // $25 loyalty discount
+    totalItems: 2,
+    totalPrice: 322.2, // 320 + 27.20 - 25
+  },
+  {
+    id: "#007",
+    product: {
+      name: "Under Armour HOVR",
+      image: "https://placehold.co/400/00FFFF/FFF.png",
+      price: 130,
+    },
+    status: "cancelled",
+    deliveryStatus: "cancelled",
+    paymentStatus: "refunded",
+    paymentType: "bank transfer",
+    subtotal: 130,
+    taxPercent: 8.5,
+    taxAmount: 11.05,
+    discount: 0,
+    totalItems: 1,
+    totalPrice: 141.05, // 130 + 11.05 - 0
+  },
+  {
+    id: "#008",
+    product: {
+      name: "Vans Old Skool",
+      image: "https://placehold.co/400/FFA500/FFF.png",
+      price: 70,
+    },
+    status: "delivered",
+    deliveryStatus: "delivered",
+    paymentStatus: "paid",
+    paymentType: "credit card",
+    subtotal: 140,
+    taxPercent: 8.5,
+    taxAmount: 11.9,
+    discount: 15, // $15 promo code discount
+    totalItems: 2,
+    totalPrice: 136.9, // 140 + 11.90 - 15
+  },
+  {
+    id: "#009",
+    product: {
+      name: "Converse Chuck Taylor",
+      image: "https://placehold.co/400/800080/FFF.png",
+      price: 60,
+    },
+    status: "delivered",
+    deliveryStatus: "delivered",
+    paymentStatus: "paid",
+    paymentType: "paypal",
+    subtotal: 60,
+    taxPercent: 8.5,
+    taxAmount: 5.1,
+    discount: 5, // $5 student discount
+    totalItems: 1,
+    totalPrice: 60.1, // 60 + 5.10 - 5
+  },
+  {
+    id: "#010",
+    product: {
+      name: "Saucony Shadow 6000",
+      image: "https://placehold.co/400/008000/FFF.png",
+      price: 110,
+    },
+    status: "pending",
+    deliveryStatus: "pending",
+    paymentStatus: "pending",
+    paymentType: "credit card",
+    subtotal: 220,
+    taxPercent: 8.5,
+    taxAmount: 18.7,
+    discount: 0,
+    totalItems: 2,
+    totalPrice: 238.7, // 220 + 18.70 - 0
   },
 ];

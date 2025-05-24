@@ -11,7 +11,7 @@ export default function ProductGrid({
   handleAvailable,
 }: {
   currentItems: Products[];
-  handleAvailable: (available: boolean, id: string) => void;
+  handleAvailable?: (available: boolean, id: string) => void;
 }) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

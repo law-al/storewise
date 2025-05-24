@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -23,7 +24,7 @@ export default function RootLayout({
         className={`${manrope.variable} antialiased`}
         suppressHydrationWarning
       >
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   );
