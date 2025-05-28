@@ -63,6 +63,7 @@ export default function SetPasswordForm() {
             <InputField
               form={form}
               type="password"
+              inputType="password"
               icon={Lock}
               name="password"
               placeholder="Input your password"
@@ -70,6 +71,7 @@ export default function SetPasswordForm() {
             <InputField
               form={form}
               type="confirm"
+              inputType="password"
               icon={Lock}
               name="confirm"
               placeholder="Input your password"

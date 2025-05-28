@@ -41,6 +41,7 @@ export default function ForgotPasswordForm() {
             form={form}
             type="email"
             icon={Mail}
+            inputType="email"
             placeholder="Input your email"
           />
         </div>

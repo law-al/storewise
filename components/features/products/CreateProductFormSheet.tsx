@@ -1,5 +1,4 @@
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { SheetClose, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,15 +9,6 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleDollarSignIcon, File, Percent, TagIcon, X } from "lucide-react";
@@ -26,6 +16,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Textarea } from "../../ui/textarea";
+import { InputField } from "@/components/ui/customs/InputField";
+import SelectField from "@/components/ui/customs/SelectField";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const MAX_DIMENSION = { width: 800, height: 800 };
@@ -36,7 +28,45 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-const schema = z.object({
+type OptionType = {
+  label: string;
+  options: { value: string; label: string }[];
+};
+
+const productCategories: OptionType[] = [
+  {
+    label: "Athletic",
+    options: [
+      { value: "running-shoes", label: "Running Shoes" },
+      { value: "basketball-shoes", label: "Basketball Shoes" },
+      { value: "tennis-shoes", label: "Tennis Shoes" },
+      { value: "cross-training", label: "Cross Training" },
+      { value: "hiking-boots", label: "Hiking Boots" },
+    ],
+  },
+  {
+    label: "Formal",
+    options: [
+      { value: "oxfords", label: "Oxfords" },
+      { value: "brogues", label: "Brogues" },
+      { value: "dress-boots", label: "Dress Boots" },
+      { value: "pumps", label: "Pumps" },
+      { value: "stilettos", label: "Stilettos" },
+    ],
+  },
+  {
+    label: "Casual",
+    options: [
+      { value: "sneakers", label: "Sneakers" },
+      { value: "loafers", label: "Loafers" },
+      { value: "boat-shoes", label: "Boat Shoes" },
+      { value: "canvas-shoes", label: "Canvas Shoes" },
+      { value: "slip-ons", label: "Slip-ons" },
+    ],
+  },
+];
+
+const productSchema = z.object({
   product: z
     .string()
     .trim()
@@ -46,13 +76,9 @@ const schema = z.object({
   description: z
     .string()
     .max(160, { message: "120 - 160 characters is the recommended length" }),
-
   price: z.number().gte(1, { message: "Price must be greater than $1" }),
-
   discount: z.number().gte(0, { message: "Discount must be 0 or more" }),
-
   category: z.string().min(1, { message: "Select a category" }),
-
   images: z
     .any()
     .refine(
@@ -98,17 +124,17 @@ const schema = z.object({
     ),
 });
 
-type Input = z.infer<typeof schema>;
+type ProductType = z.infer<typeof productSchema>;
 
 const options = ["general", "upload"];
 
 export default function CreateProductFormSheet() {
   const [isActive, setIsActive] = useState<"general" | "upload">("general");
-  const form = useForm<Input>({
-    resolver: zodResolver(schema),
+  const form = useForm<ProductType>({
+    resolver: zodResolver(productSchema),
   });
-  console.log(form.formState);
-  function onSubmit(values: z.infer<typeof schema>) {
+
+  function onSubmit(values: ProductType) {
     console.log(values);
   }
 
@@ -149,111 +175,58 @@ export default function CreateProductFormSheet() {
           {isActive === "general" && (
             <div className="flex flex-col space-y-4">
               {/* Product name */}
-              <FormField
-                control={form.control}
-                name="product"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Product name</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Input your product"
-                        {...field}
-                        className="rounded-full focus-visible:border-themeOrange-300 focus-visible:border-[1px] focus-visible:ring-themeOrange-300 focus-visible:ring-[1px]"
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      50-60 character is the recommended length.
-                    </FormDescription>
-                  </FormItem>
-                )}
+              <InputField
+                form={form}
+                type="product"
+                label="Product Name"
+                description=" 50-60 character is the recommended length."
+                placeholder="Input your product"
               />
 
               {/* Description */}
               <FormField
                 control={form.control}
                 name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        rows={5}
-                        placeholder="Input your description for the product"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      120-160 character is the recommended length.
-                    </FormDescription>
-                  </FormItem>
-                )}
+                render={({ field }) => {
+                  const error = form.formState.errors.description?.message;
+                  console.log(error);
+                  return (
+                    <FormItem>
+                      <FormLabel>Description</FormLabel>
+                      <FormControl className="">
+                        <Textarea
+                          className={cn(
+                            "resize-none border-0 ring-2 focus-visible:ring-2 focus-visible:ring-themeOrange-300 focus-visible:border-0 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [MozAppearance:textfield]",
+                            error ? "!ring-red-500" : "!ring-gray-300"
+                          )}
+                          rows={5}
+                          placeholder="Input your description for the product"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        120-160 character is the recommended length.
+                      </FormDescription>
+                    </FormItem>
+                  );
+                }}
               />
 
               {/* Category */}
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Select
-                        value={field.value}
-                        onValueChange={field.onChange}
-                      >
-                        <SelectTrigger className="w-full rounded-full focus-visible:border-themeOrange-300 focus-visible:border-[1px] focus-visible:ring-themeOrange-300 focus-visible:ring-[1px]">
-                          <SelectValue placeholder="Input your category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectLabel>Fruits</SelectLabel>
-                            <SelectItem value="apple">Apple</SelectItem>
-                            <SelectItem value="banana">Banana</SelectItem>
-                            <SelectItem value="blueberry">Blueberry</SelectItem>
-                            <SelectItem value="grapes">Grapes</SelectItem>
-                            <SelectItem value="pineapple">Pineapple</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
+              <SelectField
+                form={form}
+                formSelectData={productCategories}
+                type="category"
               />
 
               <div className="flex items-center justify-between gap-6">
-                <FormField
-                  control={form.control}
-                  name="price"
-                  render={({ field }) => {
-                    const error = form.formState.errors.price?.message;
-                    return (
-                      <FormItem className="relative flex-1">
-                        <FormLabel>Price</FormLabel>
-                        <div
-                          className={`border  flex items-center rounded-full focus-visible:border-themeOrange-300 focus-visible:border-[1px] focus-visible:ring-themeOrange-300 focus-visible:ring-[1px] px-2 ${
-                            error ? "border-red-500" : "border-gray-200"
-                          }`}
-                        >
-                          <CircleDollarSignIcon
-                            size={20}
-                            className={`${
-                              error ? "text-red-500" : "text-gray-400"
-                            }`}
-                          />
-                          <FormControl className="">
-                            <Input
-                              type="number"
-                              min={0}
-                              placeholder="Input your price"
-                              {...field}
-                              className="border-none ring-0 focus-visible:border-none focus-visible:ring-0 appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [MozAppearance:textfield]"
-                            />
-                          </FormControl>
-                        </div>
-                      </FormItem>
-                    );
-                  }}
+                <InputField
+                  form={form}
+                  type="price"
+                  inputType="number"
+                  icon={CircleDollarSignIcon}
+                  placeholder="Input your price"
+                  min={0}
                 />
 
                 <FormField
@@ -265,7 +238,7 @@ export default function CreateProductFormSheet() {
                       <FormItem className="relative flex-1">
                         <FormLabel>Discount</FormLabel>
                         <div
-                          className={`border  flex items-center rounded-full focus-visible:border-themeOrange-300 focus-visible:border-[1px] focus-visible:ring-themeOrange-300 focus-visible:ring-[1px] px-2 ${
+                          className={`border-2 border-gray-300 rounded-full flex px-2 items-center transition-all duration-200 focus-within:ring-1 focus-within:ring-themeOrange-300 focus-within:border-themeOrange-300 ${
                             error ? "border-red-500" : "border-gray-200"
                           }`}
                         >

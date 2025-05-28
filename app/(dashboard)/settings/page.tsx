@@ -1,16 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Form, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@radix-ui/react-separator";
@@ -18,7 +9,6 @@ import {
   Clock1,
   Lock,
   LucideGlobe,
-  LucideIcon,
   MailIcon,
   Pen,
   Save,
@@ -35,6 +25,7 @@ import UserDiaLog from "@/components/ui/customs/UserDialog";
 import { InputField } from "@/components/ui/customs/InputField";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import SelectField from "@/components/ui/customs/SelectField";
 
 const profileSchema = z.object({
   username: z.string().min(1, "Name is required"),
@@ -46,120 +37,72 @@ const profileSchema = z.object({
 
 type ProfileType = z.infer<typeof profileSchema>;
 
-// Constants for better maintainability
-const formSelectOptions = {
-  language: [
-    {
-      label: "Language",
-      options: [
-        { value: "english", label: "English" },
-        { value: "spanish", label: "Spanish" },
-        { value: "french", label: "French" },
-        { value: "german", label: "German" },
-        { value: "chinese", label: "Chinese" },
-      ],
-    },
-  ],
-
-  timezone: [
-    {
-      label: "North America",
-      options: [
-        { value: "america/new_york", label: "Eastern Time (ET)" },
-        { value: "america/chicago", label: "Central Time (CT)" },
-        { value: "america/denver", label: "Mountain Time (MT)" },
-        { value: "america/los_angeles", label: "Pacific Time (PT)" },
-        { value: "america/anchorage", label: "Alaska Time (AKT)" },
-      ],
-    },
-    {
-      label: "Europe",
-      options: [
-        { value: "europe/london", label: "London (GMT)" },
-        { value: "europe/paris", label: "Paris (CET)" },
-        { value: "europe/berlin", label: "Berlin (CET)" },
-        { value: "europe/rome", label: "Rome (CET)" },
-        { value: "europe/moscow", label: "Moscow (MSK)" },
-      ],
-    },
-    {
-      label: "Asia",
-      options: [
-        { value: "asia/tokyo", label: "Tokyo (JST)" },
-        { value: "asia/shanghai", label: "Shanghai (CST)" },
-        { value: "asia/kolkata", label: "Mumbai (IST)" },
-        { value: "asia/dubai", label: "Dubai (GST)" },
-        { value: "asia/singapore", label: "Singapore (SGT)" },
-      ],
-    },
-    {
-      label: "Australia",
-      options: [
-        { value: "australia/sydney", label: "Sydney (AEDT)" },
-        { value: "australia/melbourne", label: "Melbourne (AEDT)" },
-        { value: "australia/perth", label: "Perth (AWST)" },
-      ],
-    },
-  ],
+type OptionType = {
+  label: string;
+  options: { value: string; label: string }[];
 };
 
-const SelectType = ({
-  form,
-  type,
-  editProfile,
-  icon,
-}: {
-  form: ReturnType<typeof useForm<ProfileType>>;
-  type: "language" | "timezone";
-  editProfile: boolean;
-  icon?: LucideIcon;
-}) => {
-  const IconComponent = icon || MailIcon;
-  return (
-    <FormField
-      control={form.control}
-      name={type}
-      render={({ field }) => {
-        return (
-          <FormItem className="flex-1">
-            <FormLabel>{`${
-              type.charAt(0).toUpperCase() + type.slice(1)
-            }`}</FormLabel>
-            <Select
-              disabled={!editProfile}
-              onValueChange={field.onChange}
-              value={field.value}
-            >
-              <SelectTrigger className="w-[400px] border-2 border-gray-300 rounded-full flex px-2 items-center transition-all duration-200 focus-visible:ring-1 focus-visible:ring-themeOrange-300 focus-visible:border-themeOrange-300">
-                <IconComponent size={15} />
-                <SelectValue placeholder={`Select a ${type}`} />
-              </SelectTrigger>
-              <SelectContent>
-                {formSelectOptions[type].map((group) => (
-                  <SelectGroup key={group.label}>
-                    <SelectLabel>{group.label}</SelectLabel>
-                    {group.options.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
-                        {item.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                ))}
-              </SelectContent>
-            </Select>
-          </FormItem>
-        );
-      }}
-    />
-  );
-};
+const language: OptionType[] = [
+  {
+    label: "Language",
+    options: [
+      { value: "english", label: "English" },
+      { value: "spanish", label: "Spanish" },
+      { value: "french", label: "French" },
+      { value: "german", label: "German" },
+      { value: "chinese", label: "Chinese" },
+    ],
+  },
+];
+
+const timezone: OptionType[] = [
+  {
+    label: "North America",
+    options: [
+      { value: "america/new_york", label: "Eastern Time (ET)" },
+      { value: "america/chicago", label: "Central Time (CT)" },
+      { value: "america/denver", label: "Mountain Time (MT)" },
+      { value: "america/los_angeles", label: "Pacific Time (PT)" },
+      { value: "america/anchorage", label: "Alaska Time (AKT)" },
+    ],
+  },
+  {
+    label: "Europe",
+    options: [
+      { value: "europe/london", label: "London (GMT)" },
+      { value: "europe/paris", label: "Paris (CET)" },
+      { value: "europe/berlin", label: "Berlin (CET)" },
+      { value: "europe/rome", label: "Rome (CET)" },
+      { value: "europe/moscow", label: "Moscow (MSK)" },
+    ],
+  },
+  {
+    label: "Asia",
+    options: [
+      { value: "asia/tokyo", label: "Tokyo (JST)" },
+      { value: "asia/shanghai", label: "Shanghai (CST)" },
+      { value: "asia/kolkata", label: "Mumbai (IST)" },
+      { value: "asia/dubai", label: "Dubai (GST)" },
+      { value: "asia/singapore", label: "Singapore (SGT)" },
+    ],
+  },
+  {
+    label: "Australia",
+    options: [
+      { value: "australia/sydney", label: "Sydney (AEDT)" },
+      { value: "australia/melbourne", label: "Melbourne (AEDT)" },
+      { value: "australia/perth", label: "Perth (AWST)" },
+    ],
+  },
+];
+
+type UploadStatus = "idle" | "uploading" | "success" | "error";
 
 export default function SettingsPage() {
   const router = useRouter();
   const [editProfile, setEditProfile] = React.useState<boolean>(false);
   const [avatar, setAvatar] = React.useState<string | null>(null);
-  const [uploadLoading, setUploadLoading] = React.useState<boolean>(false);
-  const [uploadImageError, setUploadImageError] = React.useState<string>("");
+  const [uploadStatus, setUploadStatus] = React.useState<UploadStatus>("idle");
   const avatarRef = React.useRef<HTMLInputElement>(null);
   const [isDialogOpen, setIsDialogOpen] = React.useState<boolean>(false);
   const form = useForm<ProfileType>({
@@ -167,6 +110,7 @@ export default function SettingsPage() {
     defaultValues: {
       username: "Fajaar",
       email: "fajaar123@gmail.com",
+      password: "",
       language: "english",
       timezone: "america/new_york",
     },
@@ -177,6 +121,9 @@ export default function SettingsPage() {
   }
 
   function handleProfileImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    //Attend to) handle the image upload logic
+    // when user uploads an image file, send to backend using FormData and collect the data which is the image URL and ID, the save to a state to be put in the form data to be submitted later
+
     const ACCEPTED_IMAGE_TYPES = [
       "image/jpeg",
       "image/jpg",
@@ -191,9 +138,9 @@ export default function SettingsPage() {
         ACCEPTED_IMAGE_TYPES.includes(e.target.files[0].type)
       ) {
         const file = e.target.files[0];
-        console.log("Selected file:", file);
+        // console.log("Selected file:", file);
 
-        setUploadLoading(true);
+        setUploadStatus("uploading");
 
         const reader = new FileReader();
 
@@ -201,20 +148,18 @@ export default function SettingsPage() {
           if (event.target && event.target.result) {
             const imageUrl = event.target.result as string;
             setAvatar(imageUrl);
-            setUploadLoading(false);
+            setUploadStatus("success");
 
             if (avatarRef.current) {
               avatarRef.current.value = "";
             }
           } else {
-            setUploadImageError("Something went wrong while reading the file");
-            setUploadLoading(false);
+            setUploadStatus("error");
           }
         };
 
         reader.onerror = () => {
-          setUploadImageError("Failed to read the file");
-          setUploadLoading(false);
+          setUploadStatus("error");
 
           if (avatarRef.current) {
             avatarRef.current.value = "";
@@ -230,8 +175,8 @@ export default function SettingsPage() {
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : "An unknown error occurred";
-      setUploadImageError(errorMessage);
-      setUploadLoading(false);
+
+      setUploadStatus("error");
     }
   }
 
@@ -378,18 +323,20 @@ export default function SettingsPage() {
                 </span>
               </div>
               <div className="relative">
-                <div className="flex items-center justify-between">
-                  <SelectType
+                <div className="flex items-center w-full gap-2">
+                  <SelectField
                     form={form}
+                    formSelectData={language}
                     type="language"
-                    editProfile={editProfile}
+                    editProfile={!editProfile}
                     icon={LucideGlobe}
                   />
 
-                  <SelectType
+                  <SelectField
                     form={form}
+                    formSelectData={timezone}
                     type="timezone"
-                    editProfile={editProfile}
+                    editProfile={!editProfile}
                     icon={Clock1}
                   />
                 </div>
@@ -411,6 +358,7 @@ export default function SettingsPage() {
                     onClick={() => setIsDialogOpen(true)}
                     variant="danger"
                     size="pill"
+                    type="button"
                   >
                     <User size={15} />
                     Delete Account
@@ -484,12 +432,17 @@ export default function SettingsPage() {
                   variant="standard"
                   size="pill"
                   className=""
-                  disabled={uploadLoading || form.formState.isSubmitting}
+                  disabled={
+                    uploadStatus === "uploading" || form.formState.isSubmitting
+                  }
                 >
                   <Save size={15} />
-                  {form.formState.isSubmitting
-                    ? "Uploading..."
-                    : "Save Changes"}
+                  {uploadStatus === "uploading" ||
+                  form.formState.isSubmitting ? (
+                    <span>Uploading...</span>
+                  ) : (
+                    <span>Save Changes</span>
+                  )}
                 </Button>
               </div>
             </div>

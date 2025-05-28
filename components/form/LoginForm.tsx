@@ -51,6 +51,7 @@ export default function LoginForm() {
             <InputField
               form={form}
               type="password"
+              inputType="password"
               icon={Lock}
               name="password"
             />

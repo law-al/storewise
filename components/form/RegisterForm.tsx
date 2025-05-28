@@ -64,6 +64,7 @@ export default function RegisterForm() {
           <InputField
             form={form}
             type="email"
+            inputType="email"
             icon={Mail}
             placeholder="user@gmail.com"
           />
@@ -71,6 +72,7 @@ export default function RegisterForm() {
           <InputField
             form={form}
             type="password"
+            inputType="password"
             icon={Lock}
             name="password"
             placeholder="your password"
