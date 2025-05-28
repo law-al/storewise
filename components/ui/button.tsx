@@ -20,12 +20,20 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        normal:
+          "border-2 shadow-border cursor-pointer bg-black text-white hover:bg-black/80",
+        standard:
+          "bg-themeOrange-300 text-white border-2 border-themeOrange-300 hover:bg-white hover:text-themeOrange-300 hover:border-themeOrange-300/50 cursor-pointer",
+        danger:
+          "border-2 shadow-md shadow-border cursor-pointer bg-themeError-100/20 text-themeError-300 border-themeError-300 hover:bg-themeError-100/5",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
+
+        pill: "px-5 py-2 rounded-full",
       },
     },
     defaultVariants: {

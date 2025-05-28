@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Toaster } from "@/components/ui/sonner";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -25,6 +26,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <NuqsAdapter>{children}</NuqsAdapter>
+        <Toaster className="text-white bg-black" />
       </body>
     </html>
   );
