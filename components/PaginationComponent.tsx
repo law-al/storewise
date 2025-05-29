@@ -2,7 +2,6 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
 } from "@/components/ui/pagination";
 
 import {
@@ -80,10 +79,10 @@ export default function PaginationComponent<T>({
     <>
       {children({ currentItems, handleAvailable })}
 
-      <div className="w-full flex flex-col gap-2 md:gap-0 md:flex-row items-center justify-between">
+      <div className="flex flex-col items-center justify-between w-full gap-2 md:gap-0 md:flex-row">
         <Pagination className="justify-center md:!justify-start">
           <PaginationContent className="flex items-center gap-3">
-            <PaginationItem className="border border-gray-300 rounded-full p-2">
+            <PaginationItem className="p-2 border border-gray-300 rounded-full">
               <ArrowLeft />
             </PaginationItem>
             {Array.from(
@@ -93,24 +92,24 @@ export default function PaginationComponent<T>({
                   <div
                     onClick={() => setCurrentPage(i + 1)}
                     role="button"
-                    className="border border-gray-300 w-10 h-10 flex items-center justify-center rounded-full p-2 cursor-pointer"
+                    className="flex items-center justify-center w-10 h-10 p-2 border border-gray-300 rounded-full cursor-pointer"
                   >
                     {i + 1}
                   </div>
                 </PaginationItem>
               )
             )}
-            <PaginationItem className="border border-gray-300 rounded-full p-2">
+            <PaginationItem className="p-2 border border-gray-300 rounded-full">
               <ArrowRight />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
 
-        <div className="flex-1 flex items-center gap-2">
+        <div className="flex items-center flex-1 gap-2">
           <p className="text-sm">show</p>
 
           <Select value={itemPerPage} onValueChange={setItemPerPage}>
-            <SelectTrigger className="w-fit rounded-full border-gray-300 ring-gray-300">
+            <SelectTrigger className="border-gray-300 rounded-full w-fit ring-gray-300">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

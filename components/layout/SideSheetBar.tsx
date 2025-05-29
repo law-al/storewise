@@ -3,15 +3,16 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { BellIcon, Plus, Search } from "lucide-react";
 import { Input } from "../ui/input";
-import SearchDashboard from "../SearchDashboard";
-import NotificationDashboard from "../NotificationDashboard";
-import AddProductDashboard from "../AddProductDashboard";
+import SearchDashboard from "../features/dashboard/SearchDashboard";
+import NotificationDashboard from "../features/dashboard/NotificationDashboard";
+import CreateProductFormSheet from "../features/products/CreateProductFormSheet";
 
 export default function SideSheetBar({
   sheetType = "search",
 }: {
   sheetType?: "search" | "notification" | "add-product";
 }) {
+  console.log("sidesheet rerendered");
   return (
     <>
       <Sheet>
@@ -33,7 +34,7 @@ export default function SideSheetBar({
           )}
 
           {sheetType === "add-product" && (
-            <div className="flex items-center py-3 px-4 gap-1 bg-themeOrange-400 text-sm text-white rounded-full shadow-md cursor-pointer">
+            <div className="flex items-center gap-1 px-4 py-3 text-sm text-white rounded-full shadow-md cursor-pointer bg-themeOrange-400">
               <Plus size={10} />
               <p>Add Product</p>
             </div>
@@ -44,7 +45,7 @@ export default function SideSheetBar({
 
           {sheetType === "notification" && <NotificationDashboard />}
 
-          {sheetType === "add-product" && <AddProductDashboard />}
+          {sheetType === "add-product" && <CreateProductFormSheet />}
         </SheetContent>
       </Sheet>
     </>

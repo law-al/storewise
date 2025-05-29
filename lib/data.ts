@@ -613,3 +613,111 @@ export const orders: Orders[] = [
     totalPrice: 238.7, // 220 + 18.70 - 0
   },
 ];
+
+// customers
+export type Customers = {
+  id: string;
+  image: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  dateJoined: Date;
+  totalSpends: number; // Total amount spent by the customer
+};
+
+export const sampleCustomers: Customers[] = [
+  {
+    id: "cust_001",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Sarah Johnson",
+    email: "sarah.johnson@email.com",
+    phone: "+1-555-0123",
+    address: "123 Maple Street, Springfield, IL 62701",
+    dateJoined: new Date("2023-03-15"),
+    totalSpends: 2450.75,
+  },
+  {
+    id: "cust_002",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Michael Chen",
+    email: "m.chen@gmail.com",
+    phone: "+1-555-0456",
+    address: "456 Oak Avenue, Portland, OR 97205",
+    dateJoined: new Date("2023-07-22"),
+    totalSpends: 1890.25,
+  },
+  {
+    id: "cust_003",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Emily Rodriguez",
+    email: "emily.r@outlook.com",
+    address: "789 Pine Road, Austin, TX 78701",
+    dateJoined: new Date("2022-11-08"),
+    totalSpends: 3675.5,
+  },
+  {
+    id: "cust_004",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "David Thompson",
+    phone: "+1-555-0789",
+    address: "321 Elm Drive, Seattle, WA 98101",
+    dateJoined: new Date("2024-01-12"),
+    totalSpends: 567.8,
+  },
+  {
+    id: "cust_005",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Lisa Wang",
+    email: "lisa.wang@company.com",
+    phone: "+1-555-0321",
+    address: "654 Cedar Lane, Denver, CO 80202",
+    dateJoined: new Date("2023-05-30"),
+    totalSpends: 4125.9,
+  },
+  {
+    id: "cust_006",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Robert Martinez",
+    email: "rob.martinez@email.net",
+    dateJoined: new Date("2023-09-14"),
+    totalSpends: 1234.45,
+  },
+  {
+    id: "cust_007",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Amanda Foster",
+    email: "amanda.foster@yahoo.com",
+    phone: "+1-555-0654",
+    address: "987 Birch Street, Miami, FL 33101",
+    dateJoined: new Date("2022-12-03"),
+    totalSpends: 2987.65,
+  },
+  {
+    id: "cust_008",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "James Wilson",
+    phone: "+1-555-0987",
+    address: "147 Willow Court, Boston, MA 02101",
+    dateJoined: new Date("2024-02-28"),
+    totalSpends: 825.3,
+  },
+  {
+    id: "cust_009",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Jennifer Lee",
+    email: "j.lee@hotmail.com",
+    phone: "+1-555-0147",
+    dateJoined: new Date("2023-06-18"),
+    totalSpends: 3456.78,
+  },
+  {
+    id: "cust_010",
+    image: "https://placehold.co/400/FF0000/FFF.png",
+    name: "Kevin Brown",
+    email: "kevin.brown@gmail.com",
+    address: "258 Spruce Avenue, Phoenix, AZ 85001",
+    dateJoined: new Date("2023-04-07"),
+    totalSpends: 1675.2,
+  },
+];

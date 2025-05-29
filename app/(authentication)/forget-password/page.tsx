@@ -1,5 +1,5 @@
 import AuthLayout from "@/components/layout/AuthLayout";
-import ForgotPasswordForm from "@/components/auth/ForgotPasswordForm";
+import ForgotPasswordForm from "@/components/form/ForgotPasswordForm";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeftDashIcon } from "lucide-react";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function ForgotPasswordPage() {
           </div>
 
           <div className="">
-            <h2 className="heading-lg text-center mb-1 md:mb-3">
+            <h2 className="mb-1 text-center heading-lg md:mb-3">
               Forgot Password?
             </h2>
             <p className="text-sm md:text-[18px] text-center mb-5 text-themeGrey-300">

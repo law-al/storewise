@@ -1,15 +1,20 @@
 "use client";
 
 import {
-  Calendar,
   ChevronDown,
+  GitGraph,
   Home,
   Inbox,
+  List,
+  LogOut,
   LucideIcon,
   MenuIcon,
-  Search,
   Settings,
+  Settings2Icon,
+  ShoppingBag,
   ShoppingBasket,
+  Store,
+  Users2,
 } from "lucide-react";
 
 import {
@@ -24,7 +29,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { CustomTrigger } from "../ui/CustomTrigger";
+import { CustomTrigger } from "../ui/customs/CustomTrigger";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -46,60 +51,68 @@ interface Items {
 const navItems = {
   main: [
     {
-      title: "Home",
-      url: "/home",
+      title: "Dashboard",
+      url: "/dashboard",
       icon: Home,
-      ariaLabel: "Navigate to home",
+      ariaLabel: "Navigate to dashboard",
     },
     {
-      title: "Inbox",
-      url: "/inbox",
-      icon: Inbox,
-      ariaLabel: "Open inbox",
+      title: "Product",
+      url: "/product",
+      icon: ShoppingBag,
+      ariaLabel: "Navigate to products page",
     },
     {
-      title: "Order",
-      url: "/order",
-      icon: Calendar,
-      ariaLabel: "View calendar",
+      title: "Orders",
+      url: "/orders",
+      icon: List,
+      ariaLabel: "View orders",
     },
     {
-      title: "Search",
-      url: "/search",
-      icon: Search,
-      ariaLabel: "Search content",
+      title: "Customers",
+      url: "/customers",
+      icon: Users2,
+      ariaLabel: "Manage customers",
     },
     {
-      title: "Settings",
-      url: "/settings",
-      icon: Settings,
-      ariaLabel: "Manage settings",
+      title: "Store",
+      url: "/store",
+      icon: Store,
+      ariaLabel: "Manage store",
+    },
+    {
+      title: "Analytics",
+      url: "/analytics",
+      icon: GitGraph,
+      ariaLabel: "View analytics",
     },
   ],
   tools: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
-      icon: Home,
-      ariaLabel: "Go to dashboard",
+      title: "Affiliates",
+      url: "/affiliates",
+      icon: Inbox,
+      ariaLabel: "Manage affiliates",
     },
     {
-      title: "Preferences",
-      url: "/preferences",
-      icon: Settings,
+      title: "Setup store",
+      url: "/setup_store",
+      icon: Settings2Icon,
       ariaLabel: "Edit preferences",
     },
   ],
-  shop: [
+  userOption: [
     {
-      title: "Products",
-      url: "/shop/products",
-      ariaLabel: "View products",
+      title: "Settings",
+      url: "/settings",
+      icon: Settings,
+      ariaLabel: "Edit preferences",
     },
     {
-      title: "Orders",
-      url: "/shop/orders",
-      ariaLabel: "View orders",
+      title: "Logout",
+      url: "/logout",
+      icon: LogOut,
+      ariaLabel: "Logout from the application",
     },
   ],
 };
@@ -117,7 +130,7 @@ function NavGroup({
   items: Items[];
   isCollapsed: boolean;
   pathName?: string;
-  toggleSidebar;
+  toggleSidebar?;
   isMobile: boolean;
 }) {
   return (
@@ -181,7 +194,7 @@ function NavGroup({
 function MobileNav() {
   return (
     <div className="flex items-center justify-between p-3 w-full h-[15vh]">
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <CustomTrigger isMobile={true} />
         {/* <p className="block md:hidden">y</p> */}
         <Image
@@ -266,7 +279,7 @@ export default function AppSidebar() {
                   }`}
                 >
                   <CollapsibleTrigger
-                    className="flex w-full items-center p-4 rounded-full bg-white shadow-sm"
+                    className="flex items-center w-full p-4 bg-white rounded-full shadow-sm"
                     aria-label="Toggle shop section"
                   >
                     <div className={`flex items-center gap-2`}>
@@ -276,7 +289,7 @@ export default function AppSidebar() {
                         aria-hidden="true"
                       />
                       {!isCollapsed && (
-                        <span className="font-semibold text-sm text-orange-500">
+                        <span className="text-sm font-semibold text-orange-500">
                           DPOP&apos;S Shop
                         </span>
                       )}
@@ -295,11 +308,11 @@ export default function AppSidebar() {
                 <CollapsibleContent className="px-4 py-2">
                   {!isCollapsed && (
                     <ul className="space-y-2">
-                      {navItems.shop.map((item) => (
+                      {navItems.tools.map((item) => (
                         <li key={item.title}>
                           <Link
                             href={item.url}
-                            className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md"
+                            className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100"
                             aria-label={item.ariaLabel}
                           >
                             <span>{item.title}</span>
@@ -336,7 +349,7 @@ export default function AppSidebar() {
 
         {/* Footer with User Profile */}
         <SidebarFooter>
-          <SidebarGroup className="bg-white shadow-md rounded-lg mt-auto">
+          <SidebarGroup className="mt-auto bg-white rounded-lg shadow-md">
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
@@ -370,7 +383,7 @@ export default function AppSidebar() {
                   </div>
                 </SidebarMenuItem>
 
-                {navItems.tools.map((item) => (
+                {navItems.userOption.map((item) => (
                   <SidebarMenuItem
                     key={item.title}
                     className={`flex ${isCollapsed ? "justify-center" : ""}`}
@@ -378,14 +391,24 @@ export default function AppSidebar() {
                     <SidebarMenuButton asChild>
                       <Link
                         href={item.url}
-                        className="py-3 h-10 flex items-center"
+                        className="flex items-center h-10 py-3"
                         aria-label={item.ariaLabel}
                       >
                         <item.icon
-                          className="w-5 h-5 text-gray-500"
+                          className={`w-5 h-5 ${
+                            item.title === "Logout"
+                              ? "text-red-400"
+                              : " text-gray-500"
+                          }`}
                           aria-hidden="true"
                         />
-                        <span className={isCollapsed ? "sr-only" : "ml-3"}>
+                        <span
+                          className={`${isCollapsed ? "sr-only" : "ml-3"} ${
+                            item.title === "Logout"
+                              ? "text-red-400"
+                              : "text-black"
+                          }`}
+                        >
                           {item.title}
                         </span>
                       </Link>

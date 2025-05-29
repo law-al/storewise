@@ -1,5 +1,5 @@
 import AuthLayout from "@/components/layout/AuthLayout";
-import PinForm from "@/components/auth/PinForm";
+import PinForm from "@/components/form/PinForm";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
@@ -11,7 +11,7 @@ export default function CreatePinPage() {
     <AuthLayout bgImage="/LoginImage.png" header={header} info={info}>
       <div className="auth-section">
         <div className="w-full md:w-2/3">
-          <h2 className="heading-lg text-center mb-1 md:mb-3">
+          <h2 className="mb-1 text-center heading-lg md:mb-3">
             Create Account
           </h2>
           <p className="text-sm md:text-[18px] text-center mb-5 text-themeGrey-300">
