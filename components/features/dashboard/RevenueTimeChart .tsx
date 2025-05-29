@@ -31,6 +31,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function RevenueTimeChart() {
+  console.log("re render");
   const [activeTab, setActiveTab] = useState<number>(0);
 
   function handleActive(i: number) {

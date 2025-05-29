@@ -5,11 +5,7 @@ import AppSidebar from "@/components/layout/app-sidebar";
 import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
 
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+async function Layout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 
@@ -25,7 +21,7 @@ export default async function Layout({
 
       <main className="w-full bg-gray-200 md:px-2 md:py-0 md:bg-white">
         <div className="flex items-center justify-between bg-white shadow-sm md:shadow-none h-[15vh] md:h-[10vh]">
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <SidebarTrigger className="block !w-4 md:hidden" />
             <Image
               src="/logo-png.png"
@@ -42,3 +38,5 @@ export default async function Layout({
     </SidebarProvider>
   );
 }
+
+export default Layout;

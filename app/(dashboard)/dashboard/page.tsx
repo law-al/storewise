@@ -9,6 +9,7 @@ import Link from "next/link";
 import ActivityFeed from "@/components/features/dashboard/ActivityFeed ";
 
 export default function HomePage() {
+  console.log("dashboard rerender");
   return (
     <section className="grid m-2 md:m-0 rounded-md md:rounded-none p-2 md:p-0 grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 bg-white">
       {/* GRID 1 */}

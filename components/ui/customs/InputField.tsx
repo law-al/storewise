@@ -5,6 +5,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "../form";
 import { cn } from "@/lib/utils";
 import { FieldPath, FieldValues, UseFormReturn } from "react-hook-form";
@@ -97,6 +98,7 @@ export function InputField<T extends FieldValues>({
               )}
             </div>
             {description && <FormDescription>{description}</FormDescription>}
+            <FormMessage />
           </FormItem>
         );
       }}

@@ -12,6 +12,7 @@ export default function SideSheetBar({
 }: {
   sheetType?: "search" | "notification" | "add-product";
 }) {
+  console.log("sidesheet rerendered");
   return (
     <>
       <Sheet>

@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Calendar,
   ChevronDown,
   GitGraph,
   Home,
@@ -10,7 +9,6 @@ import {
   LogOut,
   LucideIcon,
   MenuIcon,
-  Search,
   Settings,
   Settings2Icon,
   ShoppingBag,
@@ -196,7 +194,7 @@ function NavGroup({
 function MobileNav() {
   return (
     <div className="flex items-center justify-between p-3 w-full h-[15vh]">
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <CustomTrigger isMobile={true} />
         {/* <p className="block md:hidden">y</p> */}
         <Image
@@ -281,7 +279,7 @@ export default function AppSidebar() {
                   }`}
                 >
                   <CollapsibleTrigger
-                    className="flex w-full items-center p-4 rounded-full bg-white shadow-sm"
+                    className="flex items-center w-full p-4 bg-white rounded-full shadow-sm"
                     aria-label="Toggle shop section"
                   >
                     <div className={`flex items-center gap-2`}>
@@ -291,7 +289,7 @@ export default function AppSidebar() {
                         aria-hidden="true"
                       />
                       {!isCollapsed && (
-                        <span className="font-semibold text-sm text-orange-500">
+                        <span className="text-sm font-semibold text-orange-500">
                           DPOP&apos;S Shop
                         </span>
                       )}
@@ -314,7 +312,7 @@ export default function AppSidebar() {
                         <li key={item.title}>
                           <Link
                             href={item.url}
-                            className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded-md"
+                            className="flex items-center gap-2 p-2 rounded-md hover:bg-gray-100"
                             aria-label={item.ariaLabel}
                           >
                             <span>{item.title}</span>
@@ -351,7 +349,7 @@ export default function AppSidebar() {
 
         {/* Footer with User Profile */}
         <SidebarFooter>
-          <SidebarGroup className="bg-white shadow-md rounded-lg mt-auto">
+          <SidebarGroup className="mt-auto bg-white rounded-lg shadow-md">
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
@@ -393,7 +391,7 @@ export default function AppSidebar() {
                     <SidebarMenuButton asChild>
                       <Link
                         href={item.url}
-                        className="py-3 h-10 flex items-center"
+                        className="flex items-center h-10 py-3"
                         aria-label={item.ariaLabel}
                       >
                         <item.icon
